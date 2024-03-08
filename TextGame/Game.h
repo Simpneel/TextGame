@@ -7,7 +7,7 @@ private:
 	String userInput;
 	Room rooms[7][7];
 
-	int x, y;
+	size_t x, y;
 	//Player* player;
 
 public:

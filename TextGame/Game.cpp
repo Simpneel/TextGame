@@ -45,7 +45,13 @@ void Game::Run()
 	rooms[x][y].Description();
 	userInput.ReadFromConsole();
 	String tempStorage = userInput;
+
 	int tempLocStorage[2] = { x, y };
+
+	int invalidRoomIndexes[32][2] = {
+		{0,0},{1,0},{2,0},{4,0},{5,0},{6,0},
+		{0,1},{2,1},{4,1},{6,1}	};
+
 	userInput.ToLower();
 	if (userInput == "move south") {
 		y ++;

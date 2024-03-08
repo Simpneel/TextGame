@@ -10,6 +10,8 @@ private:
 public:
 	Room();
 	Room(String description, Item* items, int itemCount);
+	Room(const Room& room);
+	Room& operator=(const Room& room);
 	~Room();
 	const void Description() const;
 };

@@ -1,14 +1,17 @@
 #pragma once
 #include "Room.h"
-#include "Player.h"
+/*#include "Player.h"*/
 
 class Game {
 private:
+	String userInput;
 	Room rooms[7][7];
-	Player* player;
+
+	int x, y;
+	//Player* player;
 
 public:
 	Game();
-	~Game();
+	//~Game();
 	void Run();
 };

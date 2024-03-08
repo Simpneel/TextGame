@@ -9,12 +9,33 @@ Room::Room(){
 
 Room::Room(String description, Item* items, int itemCount) {
 	this->description = description;
-	this->items = items;
 	this->items = new Item[itemCount];
 	for (int i = 0; i < itemCount; i++) {
 		this->items[i] = items[i];
 	}
 	this->itemCount = itemCount;
+	delete[] items;
+}
+
+Room::Room(const Room& room) {
+	description = room.description;
+	items = new Item[room.itemCount];
+	for (int i = 0; i < room.itemCount; i++) {
+		items[i] = room.items[i];
+	}
+	itemCount = room.itemCount;
+}
+
+Room& Room::operator=(const Room& room)
+{
+	delete[] items;
+	description = room.description;
+	items = new Item[room.itemCount];
+	for (int i = 0; i < room.itemCount; i++) {
+		items[i] = room.items[i];
+	}
+	itemCount = room.itemCount;
+	return *this;
 }
 
 Room::~Room() {

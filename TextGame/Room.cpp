@@ -2,14 +2,14 @@
 
 Room::Room(){
 	items = nullptr;
-	description = "roomDesc";
+	description = "";
 	itemCount = 0;
 }
 
 Room::Room(String description, Item* items, int itemCount) {
 	this->description = description;
 	if (itemCount == 0) {
-		description.Append("\nThis room has no items in it");
+		this->description.Append("\nThis room has no items in it");
 	}
 	this->items = new Item[itemCount];
 	for (int i = 0; i < itemCount; i++) {

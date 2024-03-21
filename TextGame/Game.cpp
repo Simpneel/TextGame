@@ -26,7 +26,7 @@ Game::Game()
 	//East rooms
 	rooms[4][3] = Room("East room 1", new Item[1]{ Item("Healing Drop", "This item can restore HP") }, 1);
 	rooms[5][3] = Room("East room 2", nullptr, 0);
-	rooms[6][3] = Room("East room 2", new Item[1]{ Item("Shortstaff","This item increases the damage of attack based spells") }, 1);
+	rooms[6][3] = Room("East room 3", new Item[1]{ Item("Shortstaff","This item increases the damage of attack based spells") }, 1);
 
 	//Fight rooms
 	rooms[1][1] = Room("North West room", nullptr, 0);
@@ -48,9 +48,18 @@ void Game::Run()
 
 	int tempLocStorage[2] = { x, y };
 
-	int invalidRoomIndexes[32][2] = {
+	int invalidRoomIndexes[32][2] = {						//Commenting out the rooms that allow me to skip through to the diagonal rooms
 		{0,0},{1,0},{2,0},{4,0},{5,0},{6,0},
-		{0,1},{2,1},{4,1},{6,1}	};
+		{0,1},/*{2,1},{4,1},*/{6,1},	
+		{0,2}/*,{1,2}*/,{2,2},{4,2},/*{5,2},*/{6,2},
+		{0,4},/*{1,4},*/{2,4},{4,4},/*{5,4},*/{6,4},
+		{0,5},/*{2,5},{4,5},*/{6,5},
+		{0,6},{1,6},{2,6},{4,6},{5,6},{6,6} 
+	};
+
+	int diagonalRoomEntry[8][2] = {
+		{2,1},{1,2},{4,1},{5,2},{1,4},{2,5},{4,5},{5,4}
+	};
 
 	userInput.ToLower();
 	if (userInput == "move south") {
@@ -71,11 +80,33 @@ void Game::Run()
 		std::cout << "\t\t\nGame unpaused\n";
 	}
 	else {
-		std::cout << "Invalid input! Please use the given commands only" << std::endl;
+		std::cout << "Invalid input! Please use the given commands only\n" << std::endl;
 	}
 	if (x > 6 || x < 0 || y>6 || y < 0) {
-		std::cout << "\n Room doesn't exist! Try going a different way";
+		std::cout << "\n Room doesn't exist! Try going a different way\n";
 		x = tempLocStorage[0];
 		y = tempLocStorage[1];
+	}
+	for (int i = 0; i < 32; i++) {
+		if (x == invalidRoomIndexes[i][0] && y == invalidRoomIndexes[i][1]) {
+			std::cout << "An unbreakable wall stops you from going that way. Try going a different way\n";
+			x = tempLocStorage[0];
+			y = tempLocStorage[1];
+		}
+		else if (x == diagonalRoomEntry[i][0] && y == diagonalRoomEntry[i][1]) {
+			/*int tempStorage[2] = { diagonalRoomEntry[i][0], diagonalRoomEntry[i][1] };*/
+			if ((x == 1 && y == 2) || (x == 2 && y == 1)) {
+				x = 1; y = 1;
+			}
+			else if ((x == 4 && y == 1) || (x == 5 && y == 2)) {
+				x = 5; y = 1;
+			}
+			else if ((x == 1 && y == 4) || (x == 2 && y == 5)) {
+				x = 1; y = 5;
+			}
+			else {
+				x = 5; y = 5;
+			}
+		}
 	}
 }

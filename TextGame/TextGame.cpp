@@ -9,6 +9,7 @@ int main() {
     //
     //roomOne.Description();
     Game newGame;
+    
     while (true) {
         newGame.Run();
     }

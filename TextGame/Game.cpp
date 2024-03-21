@@ -79,6 +79,10 @@ void Game::Run()
 		system("pause");
 		std::cout << "\t\t\nGame unpaused\n";
 	}
+	else if (userInput == "tp") {
+		std::cin >> x;
+		std::cin >> y;
+	}
 	else {
 		std::cout << "Invalid input! Please use the given commands only\n" << std::endl;
 	}
@@ -97,15 +101,23 @@ void Game::Run()
 			/*int tempStorage[2] = { diagonalRoomEntry[i][0], diagonalRoomEntry[i][1] };*/
 			if ((x == 1 && y == 2) || (x == 2 && y == 1)) {
 				x = 1; y = 1;
+				String::WriteInColor(12, "YOU ENTERED AN ENEMY ROOM!\n");
+				String::WriteInColor(12, "KILL THE ENEMY TO ESCAPE\n");
 			}
 			else if ((x == 4 && y == 1) || (x == 5 && y == 2)) {
 				x = 5; y = 1;
+				String::WriteInColor(12, "YOU ENTERED AN ENEMY ROOM!\n");
+				String::WriteInColor(12, "KILL THE ENEMY TO ESCAPE\n");
 			}
 			else if ((x == 1 && y == 4) || (x == 2 && y == 5)) {
 				x = 1; y = 5;
+				String::WriteInColor(12, "YOU ENTERED AN ENEMY ROOM!\n");
+				String::WriteInColor(12, "KILL THE ENEMY TO ESCAPE\n");
 			}
 			else {
 				x = 5; y = 5;
+				String::WriteInColor(12, "YOU ENTERED AN ENEMY ROOM!\n");
+				String::WriteInColor(12, "KILL THE ENEMY TO ESCAPE\n");
 			}
 		}
 	}

@@ -1,8 +1,4 @@
 #include "String.h"
-#include <iostream>
-#include <cstring>
-#include <cctype>
-#include <ostream>
 
 String::String() {
 	str = new char[1] {'\0'};						//Initialise a new string  
@@ -197,6 +193,14 @@ String& String::WriteToConsole()				//Prints a string in console
 {
 	std::cout << str;
 	return *this;
+}
+
+void String::WriteInColor(unsigned short colorCode, String outputStr) {
+	HANDLE hcon = GetStdHandle(STD_OUTPUT_HANDLE);
+	SetConsoleTextAttribute(hcon, colorCode);
+	outputStr.WriteToConsole();
+	SetConsoleTextAttribute(hcon, 07);
+	return void();
 }
 
 const String& String::WriteToConsole() const

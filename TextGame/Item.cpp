@@ -38,7 +38,10 @@ const void Item::Description() const {
 	description.WriteToConsole();
 	std::cout << "\n";
 	if (isActive) {
-		std::cout << "This item is in your inventory \n";
+		String::WriteInColor(10, "You possess this item\n");
+	}
+	else {
+		String::WriteInColor(12, "You do not possess this item\n");
 	}
 }
 

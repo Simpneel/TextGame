@@ -1,9 +1,13 @@
 #include "Room.h"
 
-Room::Room(){
+Room::Room() {
 	items = nullptr;
 	description = "";
 	itemCount = 0;
+}
+
+Room::Room(String description) {
+	this->description = description;
 }
 
 Room::Room(String description, Item* items, int itemCount) {

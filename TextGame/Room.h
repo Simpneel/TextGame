@@ -9,6 +9,7 @@ private:
 
 public:
 	Room();
+	Room(String description);
 	Room(String description, Item* items, int itemCount);
 	Room(const Room& room);
 	Room& operator=(const Room& room);

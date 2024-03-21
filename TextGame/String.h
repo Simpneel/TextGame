@@ -4,6 +4,12 @@
 #ifndef CUSTOM_STRING_HEADER
 #define CUSTOM_STRING_HEADER
 
+#include <iostream>
+#include <cstring>
+#include <cctype>
+#include <ostream>
+#include <Windows.h>
+
 class String
 {
 public:
@@ -36,6 +42,7 @@ public:
 
 	String& ReadFromConsole();
 	String& WriteToConsole();
+	static void WriteInColor(unsigned short colorCode, String outputStr);
 	const String& WriteToConsole() const;
 
 public:

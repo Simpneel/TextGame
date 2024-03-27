@@ -108,7 +108,7 @@ String Map::Use(bool roomsVisited[7][7], int x, int y) {
 				else if (i == 3 && j > 3) {
 					if (westCount == 0) {
 						map.Append("\n");
-						map.Append("[N]");
+						map.Append("[S]");
 					}
 					else if (westCount == 1) {
 						map.Append("\n");

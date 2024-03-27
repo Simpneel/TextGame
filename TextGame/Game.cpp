@@ -45,6 +45,7 @@ void Game::Run() {
 	rooms[x][y].Description();
 
 	userInput.ReadFromConsole();
+	HUD();
 	String tempStorage = userInput;
 
 	int tempLocStorage[2] = { x, y };
@@ -133,4 +134,6 @@ void Game::Run() {
 
 void Game::HUD() {
 	system("cls");
+	map.Use(roomVisited, x, y).WriteToConsole();
+	std::cout << std::endl;
 }

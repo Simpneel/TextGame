@@ -40,7 +40,10 @@ Game::Game() {
 //}
 
 void Game::Run() {
+	roomVisited[3][3] = true;
+	String getMap = map.Use(roomVisited, x, y);
 	rooms[x][y].Description();
+
 	userInput.ReadFromConsole();
 	String tempStorage = userInput;
 
@@ -84,6 +87,9 @@ void Game::Run() {
 		std::cin >> x;
 		std::cin >> y;
 	}
+	else if (userInput == "show map") {
+		getMap.WriteToConsole();
+	}
 	else {
 		std::cout << "Invalid input! Please use the given commands only\n" << std::endl;
 	}
@@ -123,7 +129,6 @@ void Game::Run() {
 		}
 	}
 	roomVisited[x][y] = true;
-	map.Use(roomVisited);
 }
 
 void Game::HUD() {

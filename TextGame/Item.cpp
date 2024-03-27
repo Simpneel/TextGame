@@ -55,7 +55,7 @@ void Item::Use() {
 }
 
 const void HealDrop::Description() const {
-	String::WriteInColor(11, "Healing Drop");
+	String::WriteInColor(13, "Healing Drop");
 	std::cout << "- ";
 	this->description.WriteToConsole();
 	std::cout << "\n";
@@ -73,24 +73,39 @@ const void Map::Description() const {
 	return void();
 }
 
-String Map::Use(bool roomsVisited[7][7]) {
+String Map::Use(bool roomsVisited[7][7], int x, int y) {
+	String map = "[ST]";
 	for (int i = 0; i < 7; i++) {
 		for (int j = 0; j < 7; j++) {
 			if (roomsVisited[j][i] == true) {
-				String::WriteInColor(9, " [] ");
+				if (i == 3 && j == 3) {
+					
+				}
+				else if (i == 3 && j < 3) {
+					map.Append("\t[W]");
+				}
+				else if (i == 3 && j > 3) {
+					map.Prepend("[E]\t");
+				}
+				else if (j == 3 && i < 3) {
+					map.Prepend("\n[N]");
+				}
+				else if (j == 3 && i > 3) {
+					map.Append("\n[S]");
+				}
 			}
 		}
-		std::cout << std::endl;
 	}
-	return "";
+	std::cout << std::endl;
+	return map;
 }
 
 const void Shortstaff::Description() const {
 	return void();
 }
 
-float Shortstaff::Use() {
+float Shortstaff::Use(float baseDmg) {
 	if (isActive == true) {
-		return dmgInc;
+		return baseDmg + (baseDmg * dmgInc);
 	}
 }

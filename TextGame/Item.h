@@ -36,15 +36,16 @@ private:
 	bool isRoomVisited;
 public:
 	const void Description() const;
-	String Use(bool roomsVisited[7][7]);
+	String Use(bool roomsVisited[7][7], int x ,int y);
 	
 };
 
 class Shortstaff : public Item {
 private:
-	float dmgInc;
+	String description = "This item increases the damage of all spells you use by 20%";
+	float dmgInc=0.2;
 	bool isActive;
 public:
 	const void Description() const;
-	float Use();
+	float Use(float baseDmg);
 };

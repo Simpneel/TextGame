@@ -19,3 +19,32 @@ public:
 	const void Description() const;
 	void Use();
 };
+
+class HealDrop : public Item {
+private:
+	int count = 2;
+	int HealAmt = 33;
+	String description = "This item heals you for one third your maximum HP";
+public:
+	const void Description() const;
+	int Use();
+};
+
+class Map : public Item {
+private:
+	String description = "This item shows you a map of all rooms you have visited\nRooms only register after you have entered the room";
+	bool isRoomVisited;
+public:
+	const void Description() const;
+	String Use(bool roomsVisited[7][7]);
+	
+};
+
+class Shortstaff : public Item {
+private:
+	float dmgInc;
+	bool isActive;
+public:
+	const void Description() const;
+	float Use();
+};

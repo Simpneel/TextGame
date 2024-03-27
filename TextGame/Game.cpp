@@ -1,7 +1,6 @@
 #include "Game.h"
 
-Game::Game()
-{
+Game::Game() {
 	x = 3, y = 3;
 
 	//Starting room
@@ -13,20 +12,20 @@ Game::Game()
 	rooms[3][2] = Room("North room 1", nullptr, 0);
 
 	//South rooms
-	rooms[3][4] = Room("South room 1", new Item[1]{ Item("Torch", "This item can light up a dark room") }, 1);
+	rooms[3][4] = Room("South room 1", new Item[1]{ Item("Torch", "This item can light up a dark room",true) }, 1);
 	rooms[3][5] = Room("South room 2", nullptr, 0);
 	rooms[3][6] = Room("South room 3", nullptr, 0);
 	//move north
 
 	//West rooms
 	rooms[2][3] = Room("West room 1", nullptr, 0);
-	rooms[1][3] = Room("West room 2", new Item[1]{ Item("Map","This item can show you all explored rooms") }, 1);
+	rooms[1][3] = Room("West room 2", new Item[1]{ Item("Map","This item can show you all explored rooms",true) }, 1);
 	rooms[0][3] = Room("West room 3", nullptr, 0);
 
 	//East rooms
-	rooms[4][3] = Room("East room 1", new Item[1]{ Item("Healing Drop", "This item can restore HP") }, 1);
+	rooms[4][3] = Room("East room 1", new Item[1]{ Item("Healing Drop", "This item can restore HP",false) }, 1);
 	rooms[5][3] = Room("East room 2", nullptr, 0);
-	rooms[6][3] = Room("East room 3", new Item[1]{ Item("Shortstaff","This item increases the damage of attack based spells") }, 1);
+	rooms[6][3] = Room("East room 3", new Item[1]{ Item("Shortstaff","This item increases the damage of attack based spells",false) }, 1);
 
 	//Fight rooms
 	rooms[1][1] = Room("North West room", nullptr, 0);
@@ -40,8 +39,7 @@ Game::Game()
 //{
 //}
 
-void Game::Run()
-{
+void Game::Run() {
 	rooms[x][y].Description();
 	userInput.ReadFromConsole();
 	String tempStorage = userInput;
@@ -62,6 +60,7 @@ void Game::Run()
 	};
 
 	userInput.ToLower();
+	std::cout << std::endl;
 	if (userInput == "move south") {
 		y ++;
 	}
@@ -75,9 +74,11 @@ void Game::Run()
 		x++;
 	}
 	else if (userInput == "pause game") {
-		std::cout << "\t\t\nGame paused\n";
+		String::WriteInColor(11, "\t\t\n\nGAME PAUSED\n\n");
+		system("color 87");
 		system("pause");
-		std::cout << "\t\t\nGame unpaused\n";
+		system("color 07");
+		String::WriteInColor(11, "\t\t\n\nGAME UNPAUSED\n\n");
 	}
 	else if (userInput == "tp") {
 		std::cin >> x;
@@ -121,4 +122,10 @@ void Game::Run()
 			}
 		}
 	}
+	roomVisited[x][y] = true;
+	map.Use(roomVisited);
+}
+
+void Game::HUD() {
+	system("cls");
 }

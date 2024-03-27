@@ -75,28 +75,57 @@ const void Map::Description() const {
 
 String Map::Use(bool roomsVisited[7][7], int x, int y) {
 	String map = "[ST]";
+	int westCount = 0;
+	int eastCount = 0;
 	for (int i = 0; i < 7; i++) {
 		for (int j = 0; j < 7; j++) {
-			if (roomsVisited[j][i] == true) {
-				if (i == 3 && j == 3) {
-					
-				}
-				else if (i == 3 && j < 3) {
-					map.Append("\t[W]");
-				}
-				else if (i == 3 && j > 3) {
-					map.Prepend("[E]\t");
-				}
-				else if (j == 3 && i < 3) {
-					map.Prepend("\n[N]");
+			if (roomsVisited[i][j] == true) {
+				if (j == 3 && i < 3) {
+					map.Prepend("[W]");
+					westCount++;
 				}
 				else if (j == 3 && i > 3) {
-					map.Append("\n[S]");
+					map.Replace("[ST]", "[ST][E]");
+				}
+				else if (i == 3 && j < 3) {
+					if (westCount == 0) {
+						map.Prepend("\n");
+						map.Prepend("[N]");
+					}
+					else if (westCount == 1) {
+						map.Prepend("\n");
+						map.Prepend("   [N]");
+					}
+					else if (westCount == 2) {
+						map.Prepend("\n");
+						map.Prepend("      [N]");
+					}
+					else {
+						map.Prepend("\n");
+						map.Prepend("         [N]");
+					}
+				}
+				else if (i == 3 && j > 3) {
+					if (westCount == 0) {
+						map.Append("\n");
+						map.Append("[N]");
+					}
+					else if (westCount == 1) {
+						map.Append("\n");
+						map.Append("   [S]");
+					}
+					else if (westCount == 2) {
+						map.Append("\n");
+						map.Append("      [S]");
+					}
+					else {
+						map.Append("\n");
+						map.Append("         [S]");
+					}
 				}
 			}
 		}
 	}
-	std::cout << std::endl;
 	return map;
 }
 

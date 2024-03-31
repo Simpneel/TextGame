@@ -142,7 +142,9 @@ void Game::HUD() {
 	system("cls");
 	float HUDhealth = player.giveHealth();
 	String::WriteInColor(10, HUDhealth);
+	String::WriteInColor(10, "\t| ");
 	std::cout << "\t";
+	String::WriteInColor(5, "|\t");
 	String::WriteInColor(5, player.giveName());
 	std::cout << std::endl; std::cout << std::endl;
 	std::cout << "________--------_______";

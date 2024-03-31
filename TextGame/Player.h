@@ -6,11 +6,19 @@
 class Player {
 private:
 	std::list<String> spells;
-	int dmgMod;
+	float dmg;
+	String name;
+	float health;
 
 public:
 	Player();
+	Player(String playerName, float dmg, float health);
 	~Player();
+	String giveName();
+	float giveHealth();
 	bool FindSpell(String spellName);
-	bool FindItem(String itemName)
+	void dmgBuff(Shortstaff shortstaff) const;
+	bool FindItem(String itemName, bool isActive, int itemCount);
 };
+
+

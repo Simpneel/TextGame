@@ -203,24 +203,28 @@ void String::WriteInColor(unsigned short colorCode, String outputStr) {
 	return void();
 }
 
-const String& String::WriteToConsole() const
-{
+void String::WriteInColor(unsigned short colorCode, float outputFloat) {
+	HANDLE hcon = GetStdHandle(STD_OUTPUT_HANDLE);
+	SetConsoleTextAttribute(hcon, colorCode);
+	std::cout << outputFloat;
+	SetConsoleTextAttribute(hcon, 07);
+	return void();
+}
+
+const String& String::WriteToConsole() const {
 	std::cout << str;
 	return *this;
 }
 
-bool String::operator==(const String& _other)
-{
+bool String::operator==(const String& _other) {
 	return EqualTo(_other);
 }
 
-bool String::operator!=(const String& _other)
-{
+bool String::operator!=(const String& _other) {
 	return !(EqualTo(_other));
 }
 
-bool String::operator<(const String& _other)
-{
+bool String::operator<(const String& _other) {
 	if (EqualTo(_other)) {
 		return false;
 	}

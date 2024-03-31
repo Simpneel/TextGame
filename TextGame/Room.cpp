@@ -8,6 +8,8 @@ Room::Room() {
 
 Room::Room(String description) {
 	this->description = description;
+	itemCount = 0;
+	items = nullptr;
 }
 
 Room::Room(String description, Item* items, int itemCount) {

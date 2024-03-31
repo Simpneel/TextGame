@@ -47,5 +47,5 @@ private:
 	bool isActive;
 public:
 	const void Description() const;
-	float Use(float baseDmg);
+	float Use(float baseDmg) const;
 };

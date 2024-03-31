@@ -9,7 +9,13 @@ int main() {
     //
     //roomOne.Description();
     Game newGame;
-    
+    String nameInput;
+    String::WriteInColor(45, "Welcome to the game, enter your player's name to begin the journey\n\n");
+    nameInput.ReadFromConsole();
+    int playerDmg = 10;
+    int playerHealth = 100;
+    Player newPlayer(nameInput, playerDmg, playerHealth);
+    newGame.setPlayer(newPlayer);
     while (true) {
         newGame.Run();
     }

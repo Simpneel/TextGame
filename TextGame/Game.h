@@ -1,7 +1,7 @@
 #pragma once
 #include "Room.h"
 #include <Windows.h>
-/*#include "Player.h"*/
+#include "Player.h"
 
 class Game {
 private:
@@ -13,11 +13,12 @@ private:
 	HealDrop healdrop;
 	Map map;
 	Shortstaff shortstaff;
-	//Player* player;
+	Player player;
 
 public:
 	Game();
 	//~Game();
+	void setPlayer(Player player);
 	void HUD();
 	void Run();
 };

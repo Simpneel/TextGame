@@ -41,10 +41,12 @@ Game::Game() {
 
 void Game::Run() {
 	roomVisited[3][3] = true;
+	
 	String getMap = map.Use(roomVisited, x, y);
 	rooms[x][y].Description();
 
 	userInput.ReadFromConsole();
+	roomVisited[x][y] = true;
 	HUD();
 	String tempStorage = userInput;
 
@@ -129,11 +131,24 @@ void Game::Run() {
 			}
 		}
 	}
-	roomVisited[x][y] = true;
+	
+}
+
+void Game::setPlayer(Player player) {
+	this->player = player;
 }
 
 void Game::HUD() {
 	system("cls");
+	float HUDhealth = player.giveHealth();
+	String::WriteInColor(10, HUDhealth);
+	std::cout << "\t";
+	String::WriteInColor(5, player.giveName());
+	std::cout << std::endl; std::cout << std::endl;
+	std::cout << "________--------_______";
+	std::cout << std::endl;
 	map.Use(roomVisited, x, y).WriteToConsole();
+	std::cout << std::endl;
+	std::cout << "________--------_______";
 	std::cout << std::endl;
 }

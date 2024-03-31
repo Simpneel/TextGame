@@ -43,6 +43,7 @@ public:
 	String& ReadFromConsole();
 	String& WriteToConsole();
 	static void WriteInColor(unsigned short colorCode, String outputStr);
+	static void WriteInColor(unsigned short colorCode, float outputFloat);
 	const String& WriteToConsole() const;
 
 public:

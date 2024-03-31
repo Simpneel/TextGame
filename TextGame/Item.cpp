@@ -133,7 +133,7 @@ const void Shortstaff::Description() const {
 	return void();
 }
 
-float Shortstaff::Use(float baseDmg) {
+float Shortstaff::Use(float baseDmg) const {
 	if (isActive == true) {
 		return baseDmg + (baseDmg * dmgInc);
 	}

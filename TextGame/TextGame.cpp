@@ -10,7 +10,7 @@ int main() {
     //roomOne.Description();
     Game newGame;
     String nameInput;
-    String::WriteInColor(45, "Welcome to the game, enter your player's name to begin the journey\n\n");
+    String::WriteInColor(48, "Welcome to the game, enter your player's name to begin the journey\n\n");
     nameInput.ReadFromConsole();
     int playerDmg = 10;
     int playerHealth = 100;

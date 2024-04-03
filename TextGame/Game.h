@@ -8,12 +8,14 @@ private:
 	String userInput;
 	Room rooms[7][7];
 	bool roomVisited[7][7] = {false};
+	bool mapEnable = false;
 
 	size_t x, y;
 	HealDrop healdrop;
 	Map map;
 	Shortstaff shortstaff;
 	Player player;
+	String outputs;
 
 public:
 	Game();

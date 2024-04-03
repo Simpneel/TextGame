@@ -12,10 +12,11 @@ int main() {
     String nameInput;
     String::WriteInColor(48, "Welcome to the game, enter your player's name to begin the journey\n\n");
     nameInput.ReadFromConsole();
-    int playerDmg = 10;
+    int playerDmg = 5;
     int playerHealth = 100;
     Player newPlayer(nameInput, playerDmg, playerHealth);
     newGame.setPlayer(newPlayer);
+    //Player enemy1("Lanesra", 10.0, 80);
     while (true) {
         newGame.Run();
     }

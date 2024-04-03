@@ -23,11 +23,11 @@ public:
 class HealDrop : public Item {
 private:
 	int count = 2;
-	int HealAmt = 33;
-	String description = "This item heals you for one third your maximum HP";
+	int HealAmt = 50;
+	String description = "This item heals you for half of your maximum HP";
 public:
 	const void Description() const;
-	int Use();
+	float Use(float playerHP);
 };
 
 class Map : public Item {

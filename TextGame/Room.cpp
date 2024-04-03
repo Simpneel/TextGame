@@ -57,5 +57,4 @@ const void Room::Description() const {
 	for (int i = 0; i < itemCount; i++) {
 		items[i].Description();
 	}
-	//items.Description();
 }

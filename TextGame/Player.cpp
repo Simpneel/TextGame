@@ -11,8 +11,7 @@ Player::Player(String playerName, float dmg, float health) {
 	this->dmg = dmg;
 }
 
-Player::~Player()
-{
+Player::~Player() {
 }
 
 String Player::giveName() {
@@ -23,6 +22,10 @@ float Player::giveHealth() {
 	return health;
 }
 
+float Player::giveDamage() {
+	return dmg;
+}
+
 bool Player::FindSpell(String spellname) {
 	return false;
 }
@@ -31,19 +34,6 @@ void Player::dmgBuff(Shortstaff shortstaff) const {
 	shortstaff.Use(dmg);
 }
 
-bool Player::FindItem(String itemName, bool isActive, int itemCount) {
-	if (isActive == true && itemCount > 0) {
-		String::WriteInColor(7, "You have this item!\n");
-		std::cout << itemCount + " available in inventory.\n";
-		return true;
-	}
-	else if (isActive == true && itemCount == 0) {
-		String::WriteInColor(7, "You don't have this item.\n");
-		std::cout << "Current count - 0\n";
-		return false;
-	}
-	else {
-		String::WriteInColor(7, "Item not found\n");
-		return false;
-	}
+bool Player::FindItem(String itemName) {
+	return false;
 }

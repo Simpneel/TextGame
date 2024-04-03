@@ -62,8 +62,8 @@ const void HealDrop::Description() const {
 	
 }
 
-int HealDrop::Use() {
-	return HealAmt;
+float HealDrop::Use(float playerHP) {
+	return HealAmt + playerHP;
 }
 
 const void Map::Description() const {
@@ -80,7 +80,15 @@ String Map::Use(bool roomsVisited[7][7], int x, int y) {
 	for (int i = 0; i < 7; i++) {
 		for (int j = 0; j < 7; j++) {
 			if (roomsVisited[i][j] == true) {
-				if (j == 3 && i < 3) {
+				if (j == 3 && i == 2) {
+					map.Prepend("[W]");
+					westCount++;
+				}
+				else if (j == 3 && i == 1) {
+					map.Prepend("[W]");
+					westCount++;
+				}
+				else if (j == 3 && i == 0) {
 					map.Prepend("[W]");
 					westCount++;
 				}
@@ -136,5 +144,8 @@ const void Shortstaff::Description() const {
 float Shortstaff::Use(float baseDmg) const {
 	if (isActive == true) {
 		return baseDmg + (baseDmg * dmgInc);
+	}
+	else {
+		return baseDmg;
 	}
 }

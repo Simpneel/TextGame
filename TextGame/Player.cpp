@@ -52,6 +52,10 @@ bool Player::FindSpell(String spellname) {
 	}
 }
 
+void Player::HUDSpellList() {
+
+}
+
 void Player::addItem(String itemName) {
 	items.push_back(itemName);
 	return void();
@@ -69,6 +73,10 @@ bool Player::FindItem(String itemName) {
 			return false;
 		}
 	}
+}
+
+void Player::HUDItemList() {
+
 }
 
 Enemy::Enemy() {

@@ -4,6 +4,8 @@
 #include "Spell.h"
 
 class Game {
+public:
+	bool keepGameRunning = true;
 private:
 	String userInput;
 	String outputs;
@@ -11,6 +13,7 @@ private:
 	Room rooms[7][7];
 	bool roomVisited[7][7] = {false};
 	bool mapEnable = false;
+
 
 	bool healDrop1Activate = false;
 	bool healDrop2Activate = false;
@@ -34,6 +37,7 @@ private:
 	Exort exort;
 
 public:
+
 	Game();
 	void setEnemies(Enemy enemy1, Enemy enemy2, Enemy enemy3, Enemy enemy4);
 	void setPlayer(Player player);

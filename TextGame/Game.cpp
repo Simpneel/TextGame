@@ -46,12 +46,8 @@ void Game::Run() {
 	roomVisited[3][3] = true;
 
 	rooms[x][y].Description();
-	/*float playerHealth = player.giveHealth();
-	float playerDmg = player.giveDamage();*/
 
 	userInput.ReadFromConsole();
-	float enemy1HP = enemy1.giveHealthFloat();
-
 	
 	String tempStorage = userInput;
 
@@ -93,6 +89,14 @@ void Game::Run() {
 		system("color 07");
 		outputs.Append("\t\t\n\nGAME UNPAUSED\n\n");
 	}
+	else if (userInput == "exit game") {
+		String::WriteInColor(4, "Are you sure you want to give up?\nNo progress will be saved\n\nType YES to exit and NO to continue\n");
+		String seeIfPlayerIsALoser;
+		seeIfPlayerIsALoser.ReadFromConsole().ToLower();
+		if (seeIfPlayerIsALoser.EqualTo("yes")) {
+			keepGameRunning = false;
+		}
+	}
 	else if (userInput == "tp") {
 		std::cin >> x;
 		std::cin >> y;
@@ -107,7 +111,7 @@ void Game::Run() {
 		if (healdrop.getCount() > 0) {
 			player.setHealth(healdrop.Use(player.giveHealth()));
 			healdrop.setCount(healdrop.getCount() - 1);
-			outputs.Append("One healing drop consumed!\n");
+			outputs.Append("\t\t\tOne healing drop consumed!\n");
 		}
 		else if (healDrop1Activate != true && healDrop2Activate != true) {
 			outputs.Append("You need to first find a healing drop to use this command, you noob.\n");
@@ -117,7 +121,7 @@ void Game::Run() {
 		}
 	}
 	else if (userInput == "find item") {
-		String::WriteInColor(91, "Enter item name to find\n");
+		String::WriteInColor(13, "Enter item name to find\n");
 		String tempInput;
 		tempInput.ReadFromConsole();
 		if (player.FindItem(tempInput) == true) {
@@ -128,7 +132,7 @@ void Game::Run() {
 		}
 	}
 	else if (userInput == "find spell") {
-		String::WriteInColor(44, "Enter spell name to find\n");
+		String::WriteInColor(13, "Enter spell name to find\n");
 		String tempInput;
 		tempInput.ReadFromConsole();
 		if (player.FindSpell(tempInput) == true) {
@@ -170,12 +174,12 @@ void Game::Run() {
 		}
 	}
 	else if (userInput == "cast spell") {
-		outputs.Append("Enter one of your spell names to cast\n");
+		String::WriteInColor(111,"\nEnter one of your spell names to cast\n");
 		String tempInput;
 		tempInput.ReadFromConsole();
 		tempInput.ToLower();
 		if (/*player.FindSpell(tempInput) == */true) {
-			if (tempInput == "desolate") {
+			if (tempInput == "desolate" && desolateActivate == true) {
 				if (x == 1 && y == 1) {
 					outputs.Append(enemy1.giveName());
 					outputs.Append(" was hit!\n");
@@ -194,14 +198,17 @@ void Game::Run() {
 					desolate.Cast(enemy3);
 					enemyStats.Append(enemy3.giveName()); enemyStats.Append(" | "); enemyStats.Append(enemy3.giveHealth());
 				}
-				else {
+				else if (x == 1 && y == 5) {
 					outputs.Append(enemy4.giveName());
 					outputs.Append(" was hit!\n");
 					desolate.Cast(enemy4);
 					enemyStats.Append(enemy4.giveName()); enemyStats.Append(" | "); enemyStats.Append(enemy4.giveHealth());
 				}
+				else {
+					outputs.Append("Who are you casting this on?\n\t\t\tNo enemies nearby\n");
+				}
 			}
-			else if (tempInput == "exort") {
+			else if (tempInput == "exort" && exortActivate == true) {
 				if (x == 1 && y == 1) {
 					outputs.Append(enemy1.giveName());
 					outputs.Append(" was hit!\n");
@@ -220,15 +227,21 @@ void Game::Run() {
 					exort.Cast(enemy3);
 					enemyStats.Append(enemy3.giveName()); enemyStats.Append(" | "); enemyStats.Append(enemy3.giveHealth());
 				}
-				else {
+				else if (x == 1 && y == 5){
 					outputs.Append(enemy4.giveName());
 					outputs.Append(" was hit!\n");
 					exort.Cast(enemy4);
 					enemyStats.Append(enemy4.giveName()); enemyStats.Append(" | "); enemyStats.Append(enemy4.giveHealth());
 				}
+				else {
+					outputs.Append("Who are you casting this on?\n\t\t\tNo enemies nearby\n");
+				}
 			}
-			else if (tempInput == "ra") {
+			else if (tempInput == "ra" && raActivate == true) {
 
+			}
+			else {
+				outputs.Append("Unknown spell.\n You either do not have this spell or you typed the wrong spell name.\n");
 			}
 		}
 	}
@@ -343,6 +356,27 @@ void Game::Run() {
 			}
 		}
 	}
+	if (x == 3 && y == 0) {
+		if (!exortActivate) {
+			exortActivate = true;
+			outputs.Append("You have acquired a new spell!\n\t\tSpell name: Exort\tSpell damage: 15\n");
+			player.addSpell("exort");
+		}
+	}
+	if (x == 3 && y == 4) {
+		if (!desolateActivate) {
+			desolateActivate = true;
+			outputs.Append("You have acquired a new spell!\n\t\tSpell name: Desolate\tSpell damage: 10\n");
+			player.addSpell("desolate");
+		}
+	}
+	if (x == 3 && y == 6) {
+		if (!raActivate) {
+			raActivate = true;
+			outputs.Append("You have acquired a new spell!\n\t\tSpell name: Ra\tSpell damage: N/A\nThis spell has special functionality\n");
+			player.addSpell("ra");
+		}
+	}
 
 	roomVisited[x][y] = true;
 	HUD();
@@ -381,7 +415,7 @@ void Game::HUD() {
 
 	String::WriteInColor(12, "\n______________________________\n\n");
 	if (!(enemyStats.EqualTo(""))) {
-		String::WriteInColor(97, enemyStats);
+		String::WriteInColor(414, enemyStats);
 		String::WriteInColor(12, "\n______________________________\n");
 	}
 

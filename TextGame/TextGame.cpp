@@ -10,8 +10,15 @@ int main() {
     //roomOne.Description();
     Game newGame;
     String nameInput;
-    String::WriteInColor(48, "Welcome to the game, enter your player's name to begin the journey\n\n");
+    String::WriteInColor(11, "Welcome to the game, enter your player's name to begin the journey\n\n");
     nameInput.ReadFromConsole();
+    std::cout << std::endl << std::endl;
+
+    String::WriteInColor(14, "Your objective in this game is to explore the entire dungeon, find and defeat\n the four bosses with whatever means possible.\n\n");
+    String::WriteInColor(14, "To begin with, you can try to move in any direction with these commands:\n\n");
+    String::WriteInColor(14, "move north\tmove south\tmove west\tmove east\n\n");
+    String::WriteInColor(14, "These are your movement commands, you also have a basic attack command to hit enemies with in the beginning\nBut you will get stronger the more you explore\n\n\n");
+   
 
     int playerDmg = 5;
     int playerHealth = 100;
@@ -24,7 +31,7 @@ int main() {
     Enemy enemy4("Enemy 4", 12.0, 120);
     newGame.setEnemies(enemy1, enemy2, enemy3, enemy4);
 
-    while (true) {
+    while (newGame.keepGameRunning) {
         newGame.Run();
     }
 }

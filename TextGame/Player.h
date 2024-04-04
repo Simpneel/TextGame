@@ -19,10 +19,14 @@ public:
 	float giveHealth();
 	float giveDamage();
 	void setHealth(float newHealth);
+
 	void addSpell(String spellName);
 	bool FindSpell(String spellName);
+	void HUDSpellList();
+
 	void addItem(String itemName);
 	bool FindItem(String itemName);
+	void HUDItemList();
 };
 
 class Enemy : public Player {

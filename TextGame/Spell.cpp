@@ -2,16 +2,14 @@
 
 Spell::Spell() {
 	name = "";
-	description = "";
 	damage = 0;
 }
 
 Spell::~Spell() {
 }
 
-Spell::Spell(String name, String description, float damage) {
+Spell::Spell(String name, float damage) {
 	this->name = name;
-	this->description = description;
 	this->damage = damage;
 }
 
@@ -19,15 +17,25 @@ void Spell::Cast(Player& playerName) {
 	float totalDmg = playerName.giveDamage() + this->damage;
 }
 
-void Spell::Cast(Player& playerName, Item itemName) {
-
-}
-
 bool Spell::Compare(Spell a, Spell b) {
-
-	return false;
+	if (a.name < b.name) {
+		return true;
+	}
+	else {
+		return false;
+	}
 }
 
-void Desolate::Cast(Player playerName) {
+void Desolate::Cast(Player& playerName) {
+	playerName.setHealth((playerName.giveHealth() - damage));
+	return void();
+}
 
+void Exort::Cast(Player& playerName) {
+	playerName.setHealth((playerName.giveHealth() - damage));
+	return void();
+}
+
+void Ra::Cast() {
+	return void();
 }

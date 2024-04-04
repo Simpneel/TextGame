@@ -5,23 +5,36 @@
 class Spell {
 private:
 	String name;
-	String description;
 	float damage = 0;
 
 public:
 	Spell();
 	~Spell();
-	Spell(String name, String description, float damage);
+	Spell(String name, float damage);
 	void Cast(Player& playerName);
-	void Cast(Player& playerName, Item itemName);
 	static bool Compare(Spell a, Spell b);
 };
 
 class Desolate : public Spell {
 private:
-	String name;
-	String description;
+	String name = "Desolate";
 	float damage = 10;
 public:
-	void Cast(Player playerName);
+	void Cast(Player& playerName);
+};
+
+class Exort : public Spell {
+private:
+	String name = "Exort";
+	float damage = 15;
+public:
+	void Cast(Player& playerName);
+};
+
+class Ra : public Spell {
+private:
+	String name = "Ra";
+	float damage = 0;
+public:
+	void Cast();
 };

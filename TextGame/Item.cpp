@@ -37,12 +37,12 @@ const void Item::Description() const {
 	std::cout << "- ";
 	description.WriteToConsole();
 	std::cout << "\n";
-	if (isActive == true) {
+	/*if (isActive == true) {
 		String::WriteInColor(10, "You possess this item\n");
 	}
 	else {
 		String::WriteInColor(12, "You do not possess this item\n");
-	}
+	}*/
 	return void();
 }
 
@@ -63,7 +63,13 @@ const void HealDrop::Description() const {
 }
 
 float HealDrop::Use(float playerHP) {
-	return HealAmt + playerHP;
+	if (count > 0) {
+		return playerHP + HealAmt;
+		count--;
+	}
+	else {
+		String::WriteInColor(10, "You do not have any healing drops left");
+	}
 }
 
 const void Map::Description() const {
@@ -142,10 +148,5 @@ const void Shortstaff::Description() const {
 }
 
 float Shortstaff::Use(float baseDmg) const {
-	if (isActive == true) {
 		return baseDmg + (baseDmg * dmgInc);
-	}
-	else {
-		return baseDmg;
-	}
 }

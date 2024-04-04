@@ -8,24 +8,24 @@ Game::Game() {
 	
 	//North rooms
 	rooms[3][0] = Room("North room 3", nullptr, 0);
-	rooms[3][1] = Room("North room 2", new Item[1]{ Item("Healing Drop", "This item can restore HP") }, 1);
+	rooms[3][1] = Room("North room 2", new Item[1]{ Item("Healing Drop", "This item can restore HP", healDrop1Activate) }, 1);
 	rooms[3][2] = Room("North room 1", nullptr, 0);
 
 	//South rooms
-	rooms[3][4] = Room("South room 1", new Item[1]{ Item("Torch", "This item can light up a dark room", false) }, 1);
+	rooms[3][4] = Room("South room 1", nullptr, 0);
 	rooms[3][5] = Room("South room 2", nullptr, 0);
 	rooms[3][6] = Room("South room 3", nullptr, 0);
 	//move north
 
 	//West rooms
 	rooms[2][3] = Room("West room 1", nullptr, 0);
-	rooms[1][3] = Room("West room 2", new Item[1]{ Item("Map","This item can show you all explored rooms", false) }, 1);
+	rooms[1][3] = Room("West room 2", new Item[1]{ Item("Map","This item can show you all explored rooms", mapActivate) }, 1);
 	rooms[0][3] = Room("West room 3", nullptr, 0);
 
 	//East rooms
-	rooms[4][3] = Room("East room 1", new Item[1]{ Item("Healing Drop", "This item can restore HP", false) }, 1);
+	rooms[4][3] = Room("East room 1", new Item[1]{ Item("Healing Drop", "This item can restore HP", healDrop2Activate) }, 1);
 	rooms[5][3] = Room("East room 2", nullptr, 0);
-	rooms[6][3] = Room("East room 3", new Item[1]{ Item("Shortstaff","This item increases the damage of attack based spells", false) }, 1);
+	rooms[6][3] = Room("East room 3", new Item[1]{ Item("Shortstaff","This item increases the damage of attack based spells", shortstaffActivate) }, 1);
 
 	//Fight rooms
 	rooms[1][1] = Room("North West room", nullptr, 0);
@@ -80,33 +80,81 @@ void Game::Run() {
 		x++;
 	}
 	else if (userInput == "pause game") {
-		String::WriteInColor(11, "\t\t\n\nGAME PAUSED\n\n");
+		String::WriteInColor(11, "\n\n\t\tGAME PAUSED\n\n");
 		system("color 87");
 		system("pause");
 		system("color 07");
-		String::WriteInColor(11, "\t\t\n\nGAME UNPAUSED\n\n");
+		outputs.Append("\t\t\n\nGAME UNPAUSED\n\n");
 	}
 	else if (userInput == "tp") {
 		std::cin >> x;
 		std::cin >> y;
 	}
-	else if (userInput == "show map") {
+	else if (userInput == "show map" && mapActivate == true) {
 		mapEnable = true;
 	}
 	else if (userInput == "hide map") {
 		mapEnable = false;
 	}
 	else if (userInput == "find item") {
-		outputs.Append("Enter item name to find\n");
+		String::WriteInColor(91, "Enter item name to find\n");
 		String tempInput;
 		tempInput.ReadFromConsole();
-		player.FindItem(tempInput);
+		if (player.FindItem(tempInput) == true) {
+			outputs.Append("You have this item in your inventory!\n");
+		}
+		else {
+			outputs.Append("You don't have this item.\n");
+		}
 	}
 	else if (userInput == "find spell") {
-		outputs.Append("Enter spell name to find\n");
+		String::WriteInColor(44, "Enter spell name to find\n");
 		String tempInput;
 		tempInput.ReadFromConsole();
-		player.FindSpell(tempInput);
+		if (player.FindSpell(tempInput) == true) {
+			outputs.Append("You have this spell in your spellbook!\n");
+		}
+		else {
+			outputs.Append("You do not have this spell in your spellbook\n");
+		}
+	}
+	else if (userInput == "attack") {
+
+	}
+	else if (userInput == "cast spell") {
+		outputs.Append("Enter the spell you wish to cast\n");
+		String tempInput;
+		tempInput.ToLower();
+		tempInput.ReadFromConsole();
+		if (player.FindSpell(tempInput) == true) {
+			if (tempInput == "desolate") {
+				desolate.Cast(enemy);
+			}
+			else if (tempInput == "exort") {
+
+			}
+			else if (tempInput == "ra") {
+
+			}
+		}
+	}
+	else if (userInput == "command list") {
+		outputs.Append("Here is a list of commands you can use:\n(p.s) capitalisation does not matter with any of these commands\n\n");
+		outputs.Append("MOVE NORTH- Makes your player move to the room north of you\n");
+		outputs.Append("MOVE SOUTH- Makes your player move to the room south of you\n");
+		outputs.Append("MOVE WEST- Makes your player move to the room west of you\n");
+		outputs.Append("MOVE EAST- Makes your player move to the room east of you\n");
+		outputs.Append("PAUSE GAME\n");
+		outputs.Append("FIND ITEM/SPELL- Prompts you to type an item/spell name in and check if it is available to you\n");
+		outputs.Append("ATTACK- Attacks enemy using your base damage\n");
+		outputs.Append("CAST SPELL- Prompts you to type a spell name in and use it against an enemy\n");
+		if (healDrop1Activate || healDrop2Activate) {
+			outputs.Append("HEAL- Heals you for half of your max hp\n\tConsumes one healing drop on use\n");
+		}
+		if (mapActivate == true) {
+			outputs.Append("SHOW MAP- Opens the map and shows you all explored rooms\n");
+			outputs.Append("HIDE MAP- Hides the map from your screen\n");
+		}
 	}
 	else {
 		outputs.Append("Invalid input! Please use the given commands only\n\n");
@@ -153,12 +201,46 @@ void Game::Run() {
 		}
 	}
 
+	if (x == 3 && y == 1) {
+		if (healDrop1Activate != true) {
+			healDrop1Activate = true;
+			outputs.Append("You have obtained two healing drops!\n");
+			player.addItem("healing drop");
+		}
+	}
+	if (x == 1 && y == 3) {
+		if (mapActivate != true) {
+			mapActivate = true;
+			outputs.Append("You have obtained a map!\nThis item will show you a map of all rooms that you have visited.\nType \"show map\" to make it visible & \"hide map\" to hide it.\n");
+			player.addItem("map");
+		}
+	}
+	if (x == 4 && y == 3) {
+		if (healDrop2Activate != true) {
+			healDrop2Activate = true;
+			outputs.Append("You have obtained two healing drops!\n");
+			player.addItem("healing drop");
+		}
+	}
+	if (x == 6 && y == 3) {
+		if (shortstaffActivate != true) {
+			shortstaffActivate = true;
+			outputs.Append("You have obtained a shortstaff!\nThis item equips automatically and increases your spell damage!\n");
+			player.addItem("shortstaff");
+			player.dmgBuff(shortstaff);
+		}
+	}
+
 	roomVisited[x][y] = true;
 	HUD();
 }
 
 void Game::setPlayer(Player player) {
 	this->player = player;
+}
+
+void Game::addEnemy(Player enemy, Room room) {
+	
 }
 
 void Game::HUD() {
@@ -168,12 +250,13 @@ void Game::HUD() {
 	std::cout << "\t";
 	String::WriteInColor(5, " ~~~~~~~~\n");
 
+	std::cout << "     ";
 	String::WriteInColor(10, HUDhealth);
-	String::WriteInColor(10, "\t| ");
+	String::WriteInColor(10, " | ");
 
 	std::cout << "\t";
 
-	String::WriteInColor(5, "|\t");
+	String::WriteInColor(5, "| ");
 	String::WriteInColor(5, player.giveName());
 	std::cout << "\n";
 	String::WriteInColor(10, "~~~~~~~~");
@@ -191,7 +274,7 @@ void Game::HUD() {
 	std::cout << std::endl;
 	std::cout << "________--------_______";
 	std::cout << std::endl; std::cout << std::endl; std::cout << std::endl;
-
+	String::WriteInColor(8, "type \"command list\" to see all available inputs");
 	outputs.Prepend("\t\t\t");
 	outputs.WriteInColor(79, outputs);
 }

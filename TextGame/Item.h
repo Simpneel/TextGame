@@ -44,7 +44,6 @@ class Shortstaff : public Item {
 private:
 	String description = "This item increases the damage of all spells you use by 20%";
 	float dmgInc=0.2;
-	bool isActive;
 public:
 	const void Description() const;
 	float Use(float baseDmg) const;

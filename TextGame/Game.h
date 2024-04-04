@@ -6,6 +6,8 @@
 class Game {
 private:
 	String userInput;
+	String outputs;
+	String enemyStats;
 	Room rooms[7][7];
 	bool roomVisited[7][7] = {false};
 	bool mapEnable = false;
@@ -14,19 +16,26 @@ private:
 	bool healDrop2Activate = false;
 	bool mapActivate = false;
 	bool shortstaffActivate = false;
+	bool desolateActivate = false;
+	bool raActivate = false;
+	bool exortActivate = false;
 
 	size_t x, y;
 	HealDrop healdrop;
 	Map map;
 	Shortstaff shortstaff;
 	Player player;
-	Player enemy;
-	String outputs;
+	Enemy enemy1;
+	Enemy enemy2;
+	Enemy enemy3;
+	Enemy enemy4;
 	Desolate desolate;
+	Ra ra;
+	Exort exort;
 
 public:
 	Game();
-	void addEnemy(Player enemy, Room room);
+	void setEnemies(Enemy enemy1, Enemy enemy2, Enemy enemy3, Enemy enemy4);
 	void setPlayer(Player player);
 	void HUD();
 	void Run();

@@ -13,8 +13,8 @@ Spell::Spell(String name, float damage) {
 	this->damage = damage;
 }
 
-void Spell::Cast(Player& playerName) {
-	float totalDmg = playerName.giveDamage() + this->damage;
+void Spell::Cast() {
+	return void();
 }
 
 bool Spell::Compare(Spell a, Spell b) {
@@ -26,16 +26,17 @@ bool Spell::Compare(Spell a, Spell b) {
 	}
 }
 
-void Desolate::Cast(Player& playerName) {
-	playerName.setHealth((playerName.giveHealth() - damage));
+void Desolate::Cast(Enemy& enemy) {
+	enemy.takeDamage(damage);
 	return void();
 }
 
-void Exort::Cast(Player& playerName) {
-	playerName.setHealth((playerName.giveHealth() - damage));
+void Exort::Cast(Enemy& enemy) {
+	enemy.takeDamage(damage);
 	return void();
 }
 
 void Ra::Cast() {
+
 	return void();
 }

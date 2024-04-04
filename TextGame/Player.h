@@ -26,4 +26,18 @@ public:
 	bool FindItem(String itemName);
 };
 
+class Enemy : public Player {
+private:
+	String name;
+	float health;
+	float dmg;
+public:
+	Enemy();
+	Enemy(String name, float dmg, float health);
+	String giveName();
+	String giveHealth();
+	float doDamage();
+	void takeDamage(float dmgDone);
+};
+
 

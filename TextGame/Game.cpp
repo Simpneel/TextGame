@@ -7,14 +7,14 @@ Game::Game() {
 	rooms[3][3] = Room("Starting room", nullptr, 0);
 	
 	//North rooms
-	rooms[3][0] = Room("North room 3", nullptr, 0);
+	rooms[3][0] = Room("North room 3", exort);
 	rooms[3][1] = Room("North room 2", new Item[1]{ Item("Healing Drop", "This item can restore HP", healDrop1Activate) }, 1);
 	rooms[3][2] = Room("North room 1", nullptr, 0);
 
 	//South rooms
-	rooms[3][4] = Room("South room 1", nullptr, 0);
+	rooms[3][4] = Room("South room 1", desolate);
 	rooms[3][5] = Room("South room 2", nullptr, 0);
-	rooms[3][6] = Room("South room 3", nullptr, 0);
+	rooms[3][6] = Room("South room 3", ra);
 	//move north
 
 	//West rooms
@@ -28,11 +28,12 @@ Game::Game() {
 	rooms[6][3] = Room("East room 3", new Item[1]{ Item("Shortstaff","This item increases the damage of attack based spells", shortstaffActivate) }, 1);
 
 	//Fight rooms
-	rooms[1][1] = Room("North West room", nullptr, 0);
-	rooms[5][1] = Room("North East room", nullptr, 0);
-	rooms[5][5] = Room("South East room", nullptr, 0);
-	rooms[1][5] = Room("South West room", nullptr, 0);
+	rooms[1][1] = Room("North West room");
+	rooms[5][1] = Room("North East room");
+	rooms[5][5] = Room("South East room");
+	rooms[1][5] = Room("South West room");
 	userInput = "";
+	enemyStats = "";
 }
 
 //Game::~Game()
@@ -41,9 +42,12 @@ Game::Game() {
 
 void Game::Run() {
 	outputs.Replace(outputs, "");
+	enemyStats.Replace(enemyStats, "");
 	roomVisited[3][3] = true;
 
 	rooms[x][y].Description();
+	/*float playerHealth = player.giveHealth();
+	float playerDmg = player.giveDamage();*/
 
 	userInput.ReadFromConsole();
 	
@@ -66,6 +70,7 @@ void Game::Run() {
 
 	userInput.ToLower();
 	std::cout << std::endl;
+
 
 	if (userInput == "move south") {
 		y ++;
@@ -119,19 +124,93 @@ void Game::Run() {
 		}
 	}
 	else if (userInput == "attack") {
-
+		if ((x == 1 || x == 5) && (y == 1 || y == 5)) {
+			if (x == 1 && y == 1) {
+				outputs.Append(enemy1.giveName());
+				enemy1.takeDamage(player.giveDamage());
+				outputs.Append(" was hit!\n");
+				enemyStats.Append(enemy1.giveName()); enemyStats.Append(" | "); enemyStats.Append(enemy1.giveHealth());
+			}
+			else if (x == 5 && y == 1) {
+				outputs.Append(enemy2.giveName());
+				enemy2.takeDamage(player.giveDamage());
+				outputs.Append(" was hit!\n");
+				enemyStats.Append(enemy2.giveName()); enemyStats.Append(" | "); enemyStats.Append(enemy2.giveHealth());
+			}
+			else if (x == 5 && y == 5) {
+				outputs.Append(enemy3.giveName());
+				enemy3.takeDamage(player.giveDamage());
+				outputs.Append(" was hit!\n");
+				enemyStats.Append(enemy3.giveName()); enemyStats.Append(" | "); enemyStats.Append(enemy3.giveHealth());
+			}
+			else {
+				outputs.Append(enemy4.giveName());
+				enemy4.takeDamage(player.giveDamage());
+				outputs.Append(" was hit!\n");
+				enemyStats.Append(enemy4.giveName()); enemyStats.Append(" | "); enemyStats.Append(enemy4.giveHealth());
+			}
+		}
+		else {
+			outputs.Append("There is no enemy here to attack, what are you doing?\n");
+		}
 	}
 	else if (userInput == "cast spell") {
-		outputs.Append("Enter the spell you wish to cast\n");
+		outputs.Append("Enter one of your spell names to cast\n");
 		String tempInput;
-		tempInput.ToLower();
 		tempInput.ReadFromConsole();
-		if (player.FindSpell(tempInput) == true) {
+		tempInput.ToLower();
+		if (/*player.FindSpell(tempInput) == */true) {
 			if (tempInput == "desolate") {
-				desolate.Cast(enemy);
+				if (x == 1 && y == 1) {
+					outputs.Append(enemy1.giveName());
+					outputs.Append(" was hit!\n");
+					desolate.Cast(enemy1);
+					enemyStats.Append(enemy1.giveName()); enemyStats.Append(" | "); enemyStats.Append(enemy1.giveHealth());
+				}
+				else if (x == 5 && y == 1) {
+					outputs.Append(enemy2.giveName());
+					outputs.Append(" was hit!\n");
+					desolate.Cast(enemy2);
+					enemyStats.Append(enemy2.giveName()); enemyStats.Append(" | "); enemyStats.Append(enemy2.giveHealth());
+				}
+				else if (x == 5 && y == 5) {
+					outputs.Append(enemy3.giveName());
+					outputs.Append(" was hit!\n");
+					desolate.Cast(enemy3);
+					enemyStats.Append(enemy3.giveName()); enemyStats.Append(" | "); enemyStats.Append(enemy3.giveHealth());
+				}
+				else {
+					outputs.Append(enemy4.giveName());
+					outputs.Append(" was hit!\n");
+					desolate.Cast(enemy4);
+					enemyStats.Append(enemy4.giveName()); enemyStats.Append(" | "); enemyStats.Append(enemy4.giveHealth());
+				}
 			}
 			else if (tempInput == "exort") {
-
+				if (x == 1 && y == 1) {
+					outputs.Append(enemy1.giveName());
+					outputs.Append(" was hit!\n");
+					exort.Cast(enemy1);
+					enemyStats.Append(enemy1.giveName()); enemyStats.Append(" | "); enemyStats.Append(enemy1.giveHealth());
+				}
+				else if (x == 5 && y == 1) {
+					outputs.Append(enemy2.giveName());
+					outputs.Append(" was hit!\n");
+					exort.Cast(enemy2);
+					enemyStats.Append(enemy2.giveName()); enemyStats.Append(" | "); enemyStats.Append(enemy2.giveHealth());
+				}
+				else if (x == 5 && y == 5) {
+					outputs.Append(enemy3.giveName());
+					outputs.Append(" was hit!\n");
+					exort.Cast(enemy3);
+					enemyStats.Append(enemy3.giveName()); enemyStats.Append(" | "); enemyStats.Append(enemy3.giveHealth());
+				}
+				else {
+					outputs.Append(enemy4.giveName());
+					outputs.Append(" was hit!\n");
+					exort.Cast(enemy4);
+					enemyStats.Append(enemy4.giveName()); enemyStats.Append(" | "); enemyStats.Append(enemy4.giveHealth());
+				}
 			}
 			else if (tempInput == "ra") {
 
@@ -176,27 +255,40 @@ void Game::Run() {
 			/*int tempStorage[2] = { diagonalRoomEntry[i][0], diagonalRoomEntry[i][1] };*/
 			if ((x == 1 && y == 2) || (x == 2 && y == 1)) {
 				x = 1; y = 1;
+				
 				outputs.Append("\nYOU ENTERED AN ENEMY ROOM!\n");
 				outputs.Append("KILL THE ENEMY TO ESCAPE\n");
 				system("pause");
+				enemyStats.Append(enemy1.giveName());
+				enemyStats.Append(" | ");
+				enemyStats.Append(enemy1.giveHealth());
 			}
 			else if ((x == 4 && y == 1) || (x == 5 && y == 2)) {
 				x = 5; y = 1;
 				outputs.Append("\nYOU ENTERED AN ENEMY ROOM!\n");
 				outputs.Append("KILL THE ENEMY TO ESCAPE\n");
 				system("pause");
+				enemyStats.Append(enemy2.giveName());
+				enemyStats.Append(" | ");
+				enemyStats.Append(enemy2.giveHealth());
 			}
 			else if ((x == 1 && y == 4) || (x == 2 && y == 5)) {
 				x = 1; y = 5;
 				outputs.Append("\nYOU ENTERED AN ENEMY ROOM!\n");
 				outputs.Append("KILL THE ENEMY TO ESCAPE\n");
 				system("pause");
+				enemyStats.Append(enemy3.giveName());
+				enemyStats.Append(" | ");
+				enemyStats.Append(enemy3.giveHealth());
 			}
 			else {
 				x = 5; y = 5;
 				outputs.Append("\nYOU ENTERED AN ENEMY ROOM!\n");
 				outputs.Append("KILL THE ENEMY TO ESCAPE\n");
 				system("pause");
+				enemyStats.Append(enemy4.giveName());
+				enemyStats.Append(" | ");
+				enemyStats.Append(enemy4.giveHealth());
 			}
 		}
 	}
@@ -239,8 +331,11 @@ void Game::setPlayer(Player player) {
 	this->player = player;
 }
 
-void Game::addEnemy(Player enemy, Room room) {
-	
+void Game::setEnemies(Enemy enemy1, Enemy enemy2, Enemy enemy3, Enemy enemy4) {
+	this->enemy1 = enemy1;
+	this->enemy2 = enemy2;
+	this->enemy3 = enemy3;
+	this->enemy4 = enemy4;
 }
 
 void Game::HUD() {
@@ -263,7 +358,11 @@ void Game::HUD() {
 	std::cout << "\t";
 	String::WriteInColor(5, " ~~~~~~~~\n");
 
-	String::WriteInColor(12, "\n______________________________");
+	String::WriteInColor(12, "\n______________________________\n\n");
+	if (!(enemyStats.EqualTo(""))) {
+		String::WriteInColor(97, enemyStats);
+		String::WriteInColor(12, "\n______________________________\n");
+	}
 
 	std::cout << std::endl; std::cout << std::endl;
 	std::cout << "________--------_______";
@@ -273,8 +372,9 @@ void Game::HUD() {
 	}
 	std::cout << std::endl;
 	std::cout << "________--------_______";
-	std::cout << std::endl; std::cout << std::endl; std::cout << std::endl;
-	String::WriteInColor(8, "type \"command list\" to see all available inputs");
+	std::cout << std::endl; std::cout << std::endl; 
+	
+	String::WriteInColor(8, "type \"command list\" to see all available inputs\n\n\n");
 	outputs.Prepend("\t\t\t");
 	outputs.WriteInColor(79, outputs);
 }

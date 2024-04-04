@@ -1,4 +1,7 @@
 #include "String.h"
+#include <ostream>
+#include <Windows.h>
+#include <charconv>
 
 String::String() {
 	str = new char[1] {'\0'};						//Initialise a new string  
@@ -8,6 +11,14 @@ String::String(const char* _str) {					//Initialising a new string using a chara
 	size_t strLength = strlen(_str) + 1;
 	str = new char[strLength];
 	strncpy(str, _str, strLength);
+}
+
+String::String(const float _str) {
+	char cVal[128] {};
+	std::to_chars(std::begin(cVal), std::end(cVal), _str);
+	size_t strLength = strlen(cVal) + 1;
+	str = new char[strLength];
+	strncpy(str, cVal, strLength);
 }
 
 String::String(const String& _other) : str(nullptr) //Initialising a new string using another string var 

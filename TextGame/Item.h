@@ -27,6 +27,8 @@ private:
 	String description = "This item heals you for half of your maximum HP";
 public:
 	const void Description() const;
+	int getCount();
+	void setCount(int newCount);
 	float Use(float playerHP);
 };
 

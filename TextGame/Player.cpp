@@ -1,8 +1,9 @@
 #include "Player.h"
 
 Player::Player() {
-	name = "playerName";
+	name = "";
 	dmg = 0;
+	health = 0;
 }
 
 Player::Player(String playerName, float dmg, float health) {
@@ -43,6 +44,7 @@ bool Player::FindSpell(String spellname) {
 	for (it = spells.begin(); it != spells.end(); it++) {
 		if (spellname.EqualTo(*it)) {
 			return true;
+			break;
 		}
 		else {
 			return false;
@@ -65,9 +67,39 @@ bool Player::FindItem(String itemName) {
 	for (it = items.begin(); it != items.end(); it++) {
 		if (itemName.EqualTo(*it)) {
 			return true;
+			break;
 		}
 		else {
 			return false;
 		}
 	}
+}
+
+Enemy::Enemy() {
+	name = "";
+	health = 0.0;
+	dmg = 0.0;
+}
+
+Enemy::Enemy(String name, float dmg, float health) {
+	this->name = name;
+	this->health = health;
+	this->dmg = dmg;
+}
+
+String Enemy::giveName() {
+	return name;
+}
+
+String Enemy::giveHealth() {
+	return String(health);
+}
+
+float Enemy::doDamage() {
+	return dmg;
+}
+
+void Enemy::takeDamage(float dmgDone) {
+	health = health - dmgDone;
+	return void();
 }

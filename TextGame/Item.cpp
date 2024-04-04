@@ -59,7 +59,15 @@ const void HealDrop::Description() const {
 	std::cout << "- ";
 	this->description.WriteToConsole();
 	std::cout << "\n";
-	
+}
+
+int HealDrop::getCount() {
+	return count;
+}
+
+void HealDrop::setCount(int newCount) {
+	count = newCount;
+	return void();
 }
 
 float HealDrop::Use(float playerHP) {
@@ -144,6 +152,10 @@ String Map::Use(bool roomsVisited[7][7], int x, int y) {
 }
 
 const void Shortstaff::Description() const {
+	String::WriteInColor(13, "Shortstaff");
+	std::cout << "- ";
+	this->description.WriteToConsole();
+	std::cout << "\n";
 	return void();
 }
 

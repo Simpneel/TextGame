@@ -7,17 +7,15 @@
 #include <iostream>
 #include <cstring>
 #include <cctype>
-#include <ostream>
-#include <Windows.h>
+
 
 class String
 {
 public:
 	String();
 	String(const char* _str);
-
 	String(const String& _other);
-
+	String(const float _str);
 	~String();
 
 public:

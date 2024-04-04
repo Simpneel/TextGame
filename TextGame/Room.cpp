@@ -25,6 +25,12 @@ Room::Room(String description, Item* items, int itemCount) {
 	delete[] items;
 }
 
+Room::Room(String description, Spell& spell) {
+	this->description = description;
+	this->spell = spell;
+	itemCount = 0;
+}
+
 Room::Room(const Room& room) {
 	description = room.description;
 	items = new Item[room.itemCount];
@@ -49,7 +55,6 @@ Room& Room::operator=(const Room& room)
 Room::~Room() {
 	delete[] items;
 }
-
 
 const void Room::Description() const {
 	description.WriteToConsole();

@@ -11,7 +11,7 @@ public:
 	Spell();
 	~Spell();
 	Spell(String name, float damage);
-	void Cast(Player& playerName);
+	void Cast();
 	static bool Compare(Spell a, Spell b);
 };
 
@@ -20,7 +20,7 @@ private:
 	String name = "Desolate";
 	float damage = 10;
 public:
-	void Cast(Player& playerName);
+	void Cast(Enemy& enemy);
 };
 
 class Exort : public Spell {
@@ -28,7 +28,7 @@ private:
 	String name = "Exort";
 	float damage = 15;
 public:
-	void Cast(Player& playerName);
+	void Cast(Enemy& enemy);
 };
 
 class Ra : public Spell {

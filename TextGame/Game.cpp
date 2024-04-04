@@ -50,6 +50,8 @@ void Game::Run() {
 	float playerDmg = player.giveDamage();*/
 
 	userInput.ReadFromConsole();
+	float enemy1HP = enemy1.giveHealthFloat();
+
 	
 	String tempStorage = userInput;
 
@@ -100,6 +102,19 @@ void Game::Run() {
 	}
 	else if (userInput == "hide map") {
 		mapEnable = false;
+	}
+	else if (userInput == "heal") {
+		if (healdrop.getCount() > 0) {
+			player.setHealth(healdrop.Use(player.giveHealth()));
+			healdrop.setCount(healdrop.getCount() - 1);
+			outputs.Append("One healing drop consumed!\n");
+		}
+		else if (healDrop1Activate != true && healDrop2Activate != true) {
+			outputs.Append("You need to first find a healing drop to use this command, you noob.\n");
+		}
+		else {
+			outputs.Append("You don't have any healing drops left. Good luck with no heals you tryhard.\n");
+		}
 	}
 	else if (userInput == "find item") {
 		String::WriteInColor(91, "Enter item name to find\n");
@@ -252,7 +267,6 @@ void Game::Run() {
 			y = tempLocStorage[1];
 		}
 		else if (x == diagonalRoomEntry[i][0] && y == diagonalRoomEntry[i][1]) {
-			/*int tempStorage[2] = { diagonalRoomEntry[i][0], diagonalRoomEntry[i][1] };*/
 			if ((x == 1 && y == 2) || (x == 2 && y == 1)) {
 				x = 1; y = 1;
 				
@@ -298,6 +312,7 @@ void Game::Run() {
 			healDrop1Activate = true;
 			outputs.Append("You have obtained two healing drops!\n");
 			player.addItem("healing drop");
+			healdrop.setCount((healdrop.getCount()+2));
 		}
 	}
 	if (x == 1 && y == 3) {
@@ -312,6 +327,7 @@ void Game::Run() {
 			healDrop2Activate = true;
 			outputs.Append("You have obtained two healing drops!\n");
 			player.addItem("healing drop");
+			healdrop.setCount((healdrop.getCount() + 2));
 		}
 	}
 	if (x == 6 && y == 3) {
@@ -319,7 +335,12 @@ void Game::Run() {
 			shortstaffActivate = true;
 			outputs.Append("You have obtained a shortstaff!\nThis item equips automatically and increases your spell damage!\n");
 			player.addItem("shortstaff");
-			player.dmgBuff(shortstaff);
+			if (desolateActivate) {
+				desolate.increaseDmg();
+			}
+			if (exortActivate) {
+				exort.increaseDmg();
+			}
 		}
 	}
 

@@ -52,10 +52,6 @@ bool Player::FindSpell(String spellname) {
 	}
 }
 
-void Player::dmgBuff(Shortstaff shortstaff) const {
-	shortstaff.Use(dmg);
-}
-
 void Player::addItem(String itemName) {
 	items.push_back(itemName);
 	return void();
@@ -93,6 +89,10 @@ String Enemy::giveName() {
 
 String Enemy::giveHealth() {
 	return String(health);
+}
+
+float Enemy::giveHealthFloat() {
+	return health;
 }
 
 float Enemy::doDamage() {

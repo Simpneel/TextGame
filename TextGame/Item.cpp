@@ -159,6 +159,6 @@ const void Shortstaff::Description() const {
 	return void();
 }
 
-float Shortstaff::Use(float baseDmg) const {
+float Shortstaff::Use(float baseDmg) {
 		return baseDmg + (baseDmg * dmgInc);
 }

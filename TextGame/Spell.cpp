@@ -31,9 +31,19 @@ void Desolate::Cast(Enemy& enemy) {
 	return void();
 }
 
+void Desolate::increaseDmg() {
+	Shortstaff shortstaff;
+	damage = shortstaff.Use(damage);
+}
+
 void Exort::Cast(Enemy& enemy) {
 	enemy.takeDamage(damage);
 	return void();
+}
+
+void Exort::increaseDmg() {
+	Shortstaff shortstaff;
+	damage = shortstaff.Use(damage);
 }
 
 void Ra::Cast() {

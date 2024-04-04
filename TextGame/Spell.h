@@ -21,6 +21,7 @@ private:
 	float damage = 10;
 public:
 	void Cast(Enemy& enemy);
+	void increaseDmg();
 };
 
 class Exort : public Spell {
@@ -29,6 +30,7 @@ private:
 	float damage = 15;
 public:
 	void Cast(Enemy& enemy);
+	void increaseDmg();
 };
 
 class Ra : public Spell {

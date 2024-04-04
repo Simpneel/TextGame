@@ -21,7 +21,6 @@ public:
 	void setHealth(float newHealth);
 	void addSpell(String spellName);
 	bool FindSpell(String spellName);
-	void dmgBuff(Shortstaff shortstaff) const;
 	void addItem(String itemName);
 	bool FindItem(String itemName);
 };
@@ -36,6 +35,7 @@ public:
 	Enemy(String name, float dmg, float health);
 	String giveName();
 	String giveHealth();
+	float giveHealthFloat();
 	float doDamage();
 	void takeDamage(float dmgDone);
 };

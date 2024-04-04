@@ -22,7 +22,7 @@ public:
 
 class HealDrop : public Item {
 private:
-	int count = 2;
+	int count;
 	int HealAmt = 50;
 	String description = "This item heals you for half of your maximum HP";
 public:
@@ -48,5 +48,5 @@ private:
 	float dmgInc=0.2;
 public:
 	const void Description() const;
-	float Use(float baseDmg) const;
+	float Use(float baseDmg);
 };

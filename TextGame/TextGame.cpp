@@ -23,6 +23,10 @@ int main() {
     int playerDmg = 5;
     int playerHealth = 100;
     Player newPlayer(nameInput, playerDmg, playerHealth);
+    newPlayer.addItem("apple");
+    newPlayer.addItem("satchel");
+    newPlayer.addItem("torch");
+
     newGame.setPlayer(newPlayer);
 
     Enemy enemy1("Lanesra", 10, 100);

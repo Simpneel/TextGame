@@ -1,16 +1,15 @@
 #pragma once
 #include "Room.h"
-#include <Windows.h>
 #include "Spell.h"
 
 class Game {
 public:
 	bool keepGameRunning = true;
+	String outputs;
 private:
 	size_t x, y;
 
 	String userInput;
-	String outputs;
 	String enemyStats;
 	Room rooms[7][7];
 	bool roomVisited[7][7] = {false};
@@ -25,6 +24,7 @@ private:
 	bool raActivate = false;
 	bool exortActivate = false;
 
+	Item item;
 	Apple apple;
 	Torch torch;
 	Satchel satchel;
@@ -47,4 +47,5 @@ public:
 	void setPlayer(Player player);
 	void HUD();
 	void Run();
+	static void addToOutput(String output);
 };

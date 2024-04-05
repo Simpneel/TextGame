@@ -1,4 +1,5 @@
 #include "Game.h"
+#include <Windows.h>
 
 Game::Game() {
 	x = 3, y = 3;
@@ -143,6 +144,21 @@ void Game::Run() {
 			outputs.Append("You do not have this spell in your spellbook\n");
 		}
 	}
+	else if (userInput == "use item") {
+		String::WriteInColor(14, "Enter item you wish to use\n");
+		String tempInput;
+		tempInput.ReadFromConsole().ToLower();
+		if (tempInput == "apple") { apple.Use(); }
+		else if (tempInput == "satchel") { satchel.Use(); }
+		else if (tempInput == "torch") { torch.Use(); }
+		else if (tempInput == "shortstaff") {
+			if (shortstaffActivate) { outputs.Append("Item is already in use\n"); }
+			else { outputs.Append("Unknown item, you time traveller\n"); }
+		}
+		else if (tempInput == "map" && mapActivate == true) { mapEnable = true; }
+		else if (tempInput == "healing orb") { outputs.Append("Use the command \"heal\" to use healing orbs\n"); }
+		else { outputs.Append("Unknown item name, please try again\n"); }
+	}
 	else if (userInput == "attack") {
 		if ((x == 1 || x == 5) && (y == 1 || y == 5)) {
 			if (x == 1 && y == 1) {
@@ -175,7 +191,7 @@ void Game::Run() {
 		}
 	}
 	else if (userInput == "cast spell") {
-		String::WriteInColor(111,"\nEnter one of your spell names to cast\n");
+		String::WriteInColor(14,"\nEnter spell name to cast\n");
 		String tempInput;
 		tempInput.ReadFromConsole();
 		tempInput.ToLower();
@@ -256,6 +272,7 @@ void Game::Run() {
 		outputs.Append("FIND ITEM/SPELL- Prompts you to type an item/spell name in and check if it is available to you\n");
 		outputs.Append("ATTACK- Attacks enemy using your base damage\n");
 		outputs.Append("CAST SPELL- Prompts you to type a spell name in and use it against an enemy\n");
+		outputs.Append("USE ITEM- Prompts you to type an item name in and use it\n");
 		if (healDrop1Activate || healDrop2Activate) {
 			outputs.Append("HEAL- Heals you for half of your max hp\n\tConsumes one healing drop on use\n");
 		}
@@ -400,7 +417,6 @@ void Game::HUD() {
 	String::WriteInColor(10, "~~~~~~~~");
 	std::cout << "\t";
 	String::WriteInColor(5, " ~~~~~~~~\n");
-
 	std::cout << "     ";
 	String::WriteInColor(10, HUDhealth);
 	String::WriteInColor(10, " | ");

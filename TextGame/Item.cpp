@@ -1,5 +1,8 @@
 #include "Item.h"
+#include "Game.h"
 #include <iostream>
+#include <thread>
+#include <chrono>
 
 Item::Item() {
 	name = "";
@@ -65,9 +68,10 @@ void Apple::Use() {
 	String::WriteInColor(7, "Do you wish to eat the apple or throw it?\n");
 	String tempInput;
 	tempInput.ReadFromConsole().ToLower();
-	if (tempInput == "eat") { String::WriteInColor(10, "It was spoiled, oops\n\n"); }
-	else if (tempInput == "throw") { String::WriteInColor(13, "Thank god you threw it, a worm popped out!"); }
-	else { String::WriteInColor(10, "Incorrect input, you put the apple away"); }
+	if (tempInput == "eat") { String::WriteInColor(7, "It was spoiled, oops\n\n"); }
+	else if (tempInput == "throw") { String::WriteInColor(11, "Thank god you threw it, a worm popped out!\n"); }
+	else {String::WriteInColor(10, "Incorrect input, you put the apple away\n"); }
+	std::this_thread::sleep_for(std::chrono::seconds(4));
 	return void();
 }
 
@@ -86,6 +90,7 @@ const void Torch::Description() const {
 
 void Torch::Use() {
 	String::WriteInColor(10, "You lit up the torch! Everything is bright and clear now.\n\n");
+	std::this_thread::sleep_for(std::chrono::seconds(4));
 	return void();
 }
 
@@ -103,7 +108,8 @@ const void Satchel::Description() const {
 }
 
 void Satchel::Use() {
-	String::WriteInColor(10, "You stashed your items away in satchel.");
+	String::WriteInColor(10, "You stashed your items away in satchel.\n");
+	std::this_thread::sleep_for(std::chrono::seconds(4));
 	return void();
 }
 
@@ -129,7 +135,7 @@ float HealDrop::Use(float playerHP) {
 		count--;
 	}
 	else {
-		String::WriteInColor(10, "You do not have any healing drops left");
+		String::WriteInColor(10, "You do not have any healing drops left\n");
 	}
 }
 

@@ -42,8 +42,14 @@ void Player::addSpell(String spellName) {
 bool binSearchFunction(String i, String j) { return i < j; }
 
 bool Player::FindSpell(String spellname) {
-	std::sort(spells.begin(), spells.end(), binSearchFunction);
-	return std::binary_search(spells.begin(), spells.end(), spellname, binSearchFunction);
+	std::vector<String>::iterator it;
+	for (it = spells.begin(); it < spells.end(); it++) {
+		if (*it < spellname) {
+
+		}
+	}
+	
+	return false;
 }
 
 void Player::HUDSpellList() {

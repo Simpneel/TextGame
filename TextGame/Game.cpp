@@ -339,21 +339,45 @@ void Game::Run() {
 	}
 	else if (x == 5 && y == 1) {
 		outputs.Append("Enemy 2 Room\n");
-		enemyStats.Append(enemy2.giveName());
-		enemyStats.Append(" | ");
-		enemyStats.Append(enemy2.giveHealth());
+		if (enemy2.giveHealthFloat() >= 0.1) {
+			enemyStats.Append(enemy2.giveName());
+			enemyStats.Append(" | ");
+			enemyStats.Append(enemy2.giveHealth());
+		}
+		else {
+			enemyStats.Append("Enemy has been defeated\n");
+			outputs.Append("\nYOU HAVE BEAT THE BOSS ROOM!\nYOU WILL BE TELEPORTED BACK TO THE STARTING ROOM\nGOOD WORK\n\n");
+			enemy2Alive = false;
+			x = 3, y = 3;
+		}
 	}
 	else if (x == 5 && y == 5) {
 		outputs.Append("Enemy 3 Room\n");
-		enemyStats.Append(enemy3.giveName());
-		enemyStats.Append(" | ");
-		enemyStats.Append(enemy3.giveHealth());
+		if (enemy3.giveHealthFloat() >= 0.1) {
+			enemyStats.Append(enemy3.giveName());
+			enemyStats.Append(" | ");
+			enemyStats.Append(enemy3.giveHealth());
+		}
+		else {
+			enemyStats.Append("Enemy has been defeated\n");
+			outputs.Append("\nYOU HAVE BEAT THE BOSS ROOM!\nYOU WILL BE TELEPORTED BACK TO THE STARTING ROOM\nGOOD WORK\n\n");
+			enemy3Alive = false;
+			x = 3, y = 3;
+		}
 	}
 	else if (x == 1 && y == 5) {
 		outputs.Append("Enemy 4 Room\n");
-		enemyStats.Append(enemy4.giveName());
-		enemyStats.Append(" | ");
-		enemyStats.Append(enemy4.giveHealth());
+		if (enemy4.giveHealthFloat() >= 0.1) {
+			enemyStats.Append(enemy4.giveName());
+			enemyStats.Append(" | ");
+			enemyStats.Append(enemy4.giveHealth());
+		}
+		else {
+			enemyStats.Append("Enemy has been defeated\n");
+			outputs.Append("\nYOU HAVE BEAT THE BOSS ROOM!\nYOU WILL BE TELEPORTED BACK TO THE STARTING ROOM\nGOOD WORK\n\n");
+			enemy4Alive = false;
+			x = 3, y = 3;
+		}
 	}
 
 	if (x == 3 && y == 1) {

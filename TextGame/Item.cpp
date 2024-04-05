@@ -48,6 +48,65 @@ void Item::Use() {
 	return void();
 }
 
+Apple::Apple() {
+	name = "Apple";
+	description = "This is an apple, you can eat it or just throw it at something to see what happens\n";
+}
+
+const void Apple::Description() const {
+	String::WriteInColor(11, name);
+	std::cout << "- ";
+	description.WriteToConsole();
+	std::cout << "\n";
+	return void();
+}
+
+void Apple::Use() {
+	String::WriteInColor(7, "Do you wish to eat the apple or throw it?\n");
+	String tempInput;
+	tempInput.ReadFromConsole().ToLower();
+	if (tempInput == "eat") { String::WriteInColor(10, "It was spoiled, oops\n\n"); }
+	else if (tempInput == "throw") { String::WriteInColor(13, "Thank god you threw it, a worm popped out!"); }
+	else { String::WriteInColor(10, "Incorrect input, you put the apple away"); }
+	return void();
+}
+
+Torch::Torch() {
+	name = "Torch";
+	description = "The torch illuminates your path and helps you travese through dark rooms\n";
+}
+
+const void Torch::Description() const {
+	String::WriteInColor(11, name);
+	std::cout << "- ";
+	description.WriteToConsole();
+	std::cout << "\n";
+	return void();
+}
+
+void Torch::Use() {
+	String::WriteInColor(10, "You lit up the torch! Everything is bright and clear now.\n\n");
+	return void();
+}
+
+Satchel::Satchel() {
+	name = "Satchel";
+	description = "This satchel holds your items for you, do not lose it.\n";
+}
+
+const void Satchel::Description() const {
+	String::WriteInColor(11, name);
+	std::cout << "- ";
+	description.WriteToConsole();
+	std::cout << "\n";
+	return void();
+}
+
+void Satchel::Use() {
+	String::WriteInColor(10, "You stashed your items away in satchel.");
+	return void();
+}
+
 const void HealDrop::Description() const  {
 	String::WriteInColor(13, "Healing Drop");
 	std::cout << "- ";
@@ -75,7 +134,7 @@ float HealDrop::Use(float playerHP) {
 }
 
 const void Map::Description() const {
-	String::WriteInColor(11, "Map"); 
+	String::WriteInColor(13, "Map"); 
 	std::cout << "- ";
 	this->description.WriteToConsole();
 	return void();

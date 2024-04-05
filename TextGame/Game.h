@@ -25,7 +25,9 @@ private:
 	bool raActivate = false;
 	bool exortActivate = false;
 
-	
+	Apple apple;
+	Torch torch;
+	Satchel satchel;
 	HealDrop healdrop;
 	Map map;
 	Shortstaff shortstaff;

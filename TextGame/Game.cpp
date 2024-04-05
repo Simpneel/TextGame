@@ -4,12 +4,12 @@ Game::Game() {
 	x = 3, y = 3;
 
 	//Starting room
-	rooms[3][3] = Room("Starting room", nullptr, 0);
+	rooms[3][3] = Room("Starting room", &apple, 1);
 	
 	//North rooms
 	rooms[3][0] = Room("North room 3", exort);
 	rooms[3][1] = Room("North room 2", &healdrop, 1);
-	rooms[3][2] = Room("North room 1", nullptr, 0);
+	rooms[3][2] = Room("North room 1", &satchel, 1);
 
 	//South rooms
 	rooms[3][4] = Room("South room 1", desolate);
@@ -18,7 +18,7 @@ Game::Game() {
 	//move north
 
 	//West rooms
-	rooms[2][3] = Room("West room 1", nullptr, 0);
+	rooms[2][3] = Room("West room 1", &torch, 1);
 	rooms[1][3] = Room("West room 2", &map, 1);
 	rooms[0][3] = Room("West room 3", nullptr, 0);
 

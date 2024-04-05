@@ -165,25 +165,21 @@ void Game::Run() {
 				outputs.Append(enemy1.giveName());
 				enemy1.takeDamage(player.giveDamage());
 				outputs.Append(" was hit!\n");
-				enemyStats.Append(enemy1.giveName()); enemyStats.Append(" | "); enemyStats.Append(enemy1.giveHealth());
 			}
 			else if (x == 5 && y == 1) {
 				outputs.Append(enemy2.giveName());
 				enemy2.takeDamage(player.giveDamage());
 				outputs.Append(" was hit!\n");
-				enemyStats.Append(enemy2.giveName()); enemyStats.Append(" | "); enemyStats.Append(enemy2.giveHealth());
 			}
 			else if (x == 5 && y == 5) {
 				outputs.Append(enemy3.giveName());
 				enemy3.takeDamage(player.giveDamage());
 				outputs.Append(" was hit!\n");
-				enemyStats.Append(enemy3.giveName()); enemyStats.Append(" | "); enemyStats.Append(enemy3.giveHealth());
 			}
-			else {
+			else if (x == 1 && y == 5) {
 				outputs.Append(enemy4.giveName());
 				enemy4.takeDamage(player.giveDamage());
 				outputs.Append(" was hit!\n");
-				enemyStats.Append(enemy4.giveName()); enemyStats.Append(" | "); enemyStats.Append(enemy4.giveHealth());
 			}
 		}
 		else {
@@ -302,35 +298,60 @@ void Game::Run() {
 				x = 1; y = 1;
 				outputs.Append("\nYOU ENTERED AN ENEMY ROOM!\n");
 				outputs.Append("KILL THE ENEMY TO ESCAPE\n");
-				enemyStats.Append(enemy1.giveName());
+				/*enemyStats.Append(enemy1.giveName());
 				enemyStats.Append(" | ");
-				enemyStats.Append(enemy1.giveHealth());
+				enemyStats.Append(enemy1.giveHealth());*/
 			}
 			else if ((x == 4 && y == 1) || (x == 5 && y == 2)) {
 				x = 5; y = 1;
 				outputs.Append("\nYOU ENTERED AN ENEMY ROOM!\n");
 				outputs.Append("KILL THE ENEMY TO ESCAPE\n");
-				enemyStats.Append(enemy2.giveName());
+				/*enemyStats.Append(enemy2.giveName());
 				enemyStats.Append(" | ");
-				enemyStats.Append(enemy2.giveHealth());
+				enemyStats.Append(enemy2.giveHealth());*/
 			}
 			else if ((x == 1 && y == 4) || (x == 2 && y == 5)) {
 				x = 1; y = 5;
 				outputs.Append("\nYOU ENTERED AN ENEMY ROOM!\n");
 				outputs.Append("KILL THE ENEMY TO ESCAPE\n");
-				enemyStats.Append(enemy3.giveName());
+				/*enemyStats.Append(enemy3.giveName());
 				enemyStats.Append(" | ");
-				enemyStats.Append(enemy3.giveHealth());
+				enemyStats.Append(enemy3.giveHealth());*/
 			}
 			else {
 				x = 5; y = 5;
 				outputs.Append("\nYOU ENTERED AN ENEMY ROOM!\n");
 				outputs.Append("KILL THE ENEMY TO ESCAPE\n");
-				enemyStats.Append(enemy4.giveName());
+				/*enemyStats.Append(enemy4.giveName());
 				enemyStats.Append(" | ");
-				enemyStats.Append(enemy4.giveHealth());
+				enemyStats.Append(enemy4.giveHealth());*/
 			}
 		}
+	}
+
+	if (x == 1 && y == 1) {
+		outputs.Append("Enemy 1 Room");
+		enemyStats.Append(enemy1.giveName());
+		enemyStats.Append(" | ");
+		enemyStats.Append(enemy1.giveHealth());
+	}
+	else if (x == 5 && y == 1) {
+		outputs.Append("Enemy 2 Room");
+		enemyStats.Append(enemy2.giveName());
+		enemyStats.Append(" | ");
+		enemyStats.Append(enemy2.giveHealth());
+	}
+	else if (x == 5 && y == 5) {
+		outputs.Append("Enemy 3 Room");
+		enemyStats.Append(enemy3.giveName());
+		enemyStats.Append(" | ");
+		enemyStats.Append(enemy3.giveHealth());
+	}
+	else if (x == 1 && y == 5) {
+		outputs.Append("Enemy 4 Room");
+		enemyStats.Append(enemy4.giveName());
+		enemyStats.Append(" | ");
+		enemyStats.Append(enemy4.giveHealth());
 	}
 
 	if (x == 3 && y == 1) {
@@ -442,7 +463,8 @@ void Game::HUD() {
 	std::cout << std::endl; std::cout << std::endl; 
 	
 	String::WriteInColor(8, "type \"command list\" to see all available inputs\n\n\n");
-	String::WriteInColor(913, "\t\t\toutput box:\n");
+	String::WriteInColor(1111, "\t\t\toutput box:\n");
 	outputs.Prepend("\t\t\t");
-	outputs.WriteInColor(911, outputs);
+	outputs.WriteInColor(1011, outputs);
+	std::cout << std::endl;
 }

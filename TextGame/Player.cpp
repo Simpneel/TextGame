@@ -39,16 +39,24 @@ void Player::addSpell(String spellName) {
 	return void();
 }
 
-bool binSearchFunction(String i, String j) { return i < j; }
-
 bool Player::FindSpell(String spellname) {
-	std::vector<String>::iterator it;
-	for (it = spells.begin(); it < spells.end(); it++) {
+	size_t start, end, mean;
+	start = 0;
+	end = spells.size();
+	mean = (start + end) / 2;
+	std::vector<String>::iterator it = spells.begin();
+	while (it != spells.end()) {
 		if (*it < spellname) {
-
+			start = mean + 1;
 		}
+		else if (*it == spellname) {
+			return true;
+		}
+		else {
+			end = mean - 1;
+		}
+		it++;
 	}
-	
 	return false;
 }
 
@@ -62,8 +70,24 @@ void Player::addItem(String itemName) {
 }
 
 bool Player::FindItem(String itemName) {
-	std::sort(items.begin(), items.end(), binSearchFunction);
-	return std::binary_search(items.begin(), items.end(), itemName, binSearchFunction);
+	size_t start, end, mean;
+	start = 0;
+	end = spells.size();
+	mean = (start + end) / 2;
+	std::vector<String>::iterator it = items.begin();
+	while (it != items.end()) {
+		if (*it < itemName) {
+			start = mean + 1;
+		}
+		else if (*it == itemName) {
+			return true;
+		}
+		else {
+			end = mean - 1;
+		}
+		it++;
+	}
+	return false;
 }
 
 void Player::HUDItemList() {

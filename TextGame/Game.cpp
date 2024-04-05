@@ -300,10 +300,8 @@ void Game::Run() {
 		else if (x == diagonalRoomEntry[i][0] && y == diagonalRoomEntry[i][1]) {
 			if ((x == 1 && y == 2) || (x == 2 && y == 1)) {
 				x = 1; y = 1;
-				
 				outputs.Append("\nYOU ENTERED AN ENEMY ROOM!\n");
 				outputs.Append("KILL THE ENEMY TO ESCAPE\n");
-				system("pause");
 				enemyStats.Append(enemy1.giveName());
 				enemyStats.Append(" | ");
 				enemyStats.Append(enemy1.giveHealth());
@@ -312,7 +310,6 @@ void Game::Run() {
 				x = 5; y = 1;
 				outputs.Append("\nYOU ENTERED AN ENEMY ROOM!\n");
 				outputs.Append("KILL THE ENEMY TO ESCAPE\n");
-				system("pause");
 				enemyStats.Append(enemy2.giveName());
 				enemyStats.Append(" | ");
 				enemyStats.Append(enemy2.giveHealth());
@@ -321,7 +318,6 @@ void Game::Run() {
 				x = 1; y = 5;
 				outputs.Append("\nYOU ENTERED AN ENEMY ROOM!\n");
 				outputs.Append("KILL THE ENEMY TO ESCAPE\n");
-				system("pause");
 				enemyStats.Append(enemy3.giveName());
 				enemyStats.Append(" | ");
 				enemyStats.Append(enemy3.giveHealth());
@@ -330,7 +326,6 @@ void Game::Run() {
 				x = 5; y = 5;
 				outputs.Append("\nYOU ENTERED AN ENEMY ROOM!\n");
 				outputs.Append("KILL THE ENEMY TO ESCAPE\n");
-				system("pause");
 				enemyStats.Append(enemy4.giveName());
 				enemyStats.Append(" | ");
 				enemyStats.Append(enemy4.giveHealth());
@@ -447,6 +442,7 @@ void Game::HUD() {
 	std::cout << std::endl; std::cout << std::endl; 
 	
 	String::WriteInColor(8, "type \"command list\" to see all available inputs\n\n\n");
+	String::WriteInColor(913, "\t\t\toutput box:\n");
 	outputs.Prepend("\t\t\t");
-	outputs.WriteInColor(79, outputs);
+	outputs.WriteInColor(911, outputs);
 }

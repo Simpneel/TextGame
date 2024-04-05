@@ -31,11 +31,17 @@ private:
 	HealDrop healdrop;
 	Map map;
 	Shortstaff shortstaff;
+
 	Player player;
 	Enemy enemy1;
 	Enemy enemy2;
 	Enemy enemy3;
 	Enemy enemy4;
+	bool enemy1Alive = true;
+	bool enemy2Alive = true;
+	bool enemy3Alive = true;
+	bool enemy4Alive = true;
+
 	Desolate desolate;
 	Ra ra;
 	Exort exort;

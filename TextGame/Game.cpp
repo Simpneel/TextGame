@@ -1,5 +1,7 @@
 #include "Game.h"
 #include <Windows.h>
+#include <thread>
+#include <chrono>
 
 Game::Game() {
 	x = 3, y = 3;
@@ -42,6 +44,13 @@ Game::Game() {
 //}
 
 void Game::Run() {
+	if (player.giveHealth() == 0) {
+		String::WriteInColor(79, "YOU DIED\n");
+		String::WriteInColor(7, "Better luck next time!\n");
+		String::WriteInColor(7, "Game will close automatically in 10 seconds\n\nGives you some time to contemplate how you managed to lose a text based game.");
+		std::this_thread::sleep_for(std::chrono::seconds(4));
+		keepGameRunning = false;
+	}
 	outputs.Replace(outputs, "");
 	enemyStats.Replace(enemyStats, "");
 	roomVisited[3][3] = true;
@@ -196,26 +205,22 @@ void Game::Run() {
 				if (x == 1 && y == 1) {
 					outputs.Append(enemy1.giveName());
 					outputs.Append(" was hit!\n");
-					desolate.Cast(enemy1);
-					enemyStats.Append(enemy1.giveName()); enemyStats.Append(" | "); enemyStats.Append(enemy1.giveHealth());
+					desolate.Cast(enemy1);					
 				}
 				else if (x == 5 && y == 1) {
 					outputs.Append(enemy2.giveName());
 					outputs.Append(" was hit!\n");
 					desolate.Cast(enemy2);
-					enemyStats.Append(enemy2.giveName()); enemyStats.Append(" | "); enemyStats.Append(enemy2.giveHealth());
 				}
 				else if (x == 5 && y == 5) {
 					outputs.Append(enemy3.giveName());
 					outputs.Append(" was hit!\n");
 					desolate.Cast(enemy3);
-					enemyStats.Append(enemy3.giveName()); enemyStats.Append(" | "); enemyStats.Append(enemy3.giveHealth());
 				}
 				else if (x == 1 && y == 5) {
 					outputs.Append(enemy4.giveName());
 					outputs.Append(" was hit!\n");
 					desolate.Cast(enemy4);
-					enemyStats.Append(enemy4.giveName()); enemyStats.Append(" | "); enemyStats.Append(enemy4.giveHealth());
 				}
 				else {
 					outputs.Append("Who are you casting this on?\n\t\t\tNo enemies nearby\n");
@@ -226,25 +231,21 @@ void Game::Run() {
 					outputs.Append(enemy1.giveName());
 					outputs.Append(" was hit!\n");
 					exort.Cast(enemy1);
-					enemyStats.Append(enemy1.giveName()); enemyStats.Append(" | "); enemyStats.Append(enemy1.giveHealth());
 				}
 				else if (x == 5 && y == 1) {
 					outputs.Append(enemy2.giveName());
 					outputs.Append(" was hit!\n");
 					exort.Cast(enemy2);
-					enemyStats.Append(enemy2.giveName()); enemyStats.Append(" | "); enemyStats.Append(enemy2.giveHealth());
 				}
 				else if (x == 5 && y == 5) {
 					outputs.Append(enemy3.giveName());
 					outputs.Append(" was hit!\n");
 					exort.Cast(enemy3);
-					enemyStats.Append(enemy3.giveName()); enemyStats.Append(" | "); enemyStats.Append(enemy3.giveHealth());
 				}
 				else if (x == 1 && y == 5){
 					outputs.Append(enemy4.giveName());
 					outputs.Append(" was hit!\n");
 					exort.Cast(enemy4);
-					enemyStats.Append(enemy4.giveName()); enemyStats.Append(" | "); enemyStats.Append(enemy4.giveHealth());
 				}
 				else {
 					outputs.Append("Who are you casting this on?\n\t\t\tNo enemies nearby\n");
@@ -294,61 +295,62 @@ void Game::Run() {
 			y = tempLocStorage[1];
 		}
 		else if (x == diagonalRoomEntry[i][0] && y == diagonalRoomEntry[i][1]) {
-			if ((x == 1 && y == 2) || (x == 2 && y == 1)) {
+			if (((x == 1 && y == 2) || (x == 2 && y == 1)) && enemy1Alive == true) {
 				x = 1; y = 1;
 				outputs.Append("\nYOU ENTERED AN ENEMY ROOM!\n");
 				outputs.Append("KILL THE ENEMY TO ESCAPE\n");
-				/*enemyStats.Append(enemy1.giveName());
-				enemyStats.Append(" | ");
-				enemyStats.Append(enemy1.giveHealth());*/
 			}
-			else if ((x == 4 && y == 1) || (x == 5 && y == 2)) {
+			else if (((x == 4 && y == 1) || (x == 5 && y == 2)) && enemy2Alive == true) {
 				x = 5; y = 1;
 				outputs.Append("\nYOU ENTERED AN ENEMY ROOM!\n");
 				outputs.Append("KILL THE ENEMY TO ESCAPE\n");
-				/*enemyStats.Append(enemy2.giveName());
-				enemyStats.Append(" | ");
-				enemyStats.Append(enemy2.giveHealth());*/
 			}
-			else if ((x == 1 && y == 4) || (x == 2 && y == 5)) {
+			else if (((x == 1 && y == 4) || (x == 2 && y == 5)) && enemy3Alive == true) {
 				x = 1; y = 5;
 				outputs.Append("\nYOU ENTERED AN ENEMY ROOM!\n");
 				outputs.Append("KILL THE ENEMY TO ESCAPE\n");
-				/*enemyStats.Append(enemy3.giveName());
-				enemyStats.Append(" | ");
-				enemyStats.Append(enemy3.giveHealth());*/
 			}
-			else {
+			else if (((x == 4 && y == 5) || (x == 5 && y == 4)) && enemy4Alive == true) {
 				x = 5; y = 5;
 				outputs.Append("\nYOU ENTERED AN ENEMY ROOM!\n");
 				outputs.Append("KILL THE ENEMY TO ESCAPE\n");
-				/*enemyStats.Append(enemy4.giveName());
-				enemyStats.Append(" | ");
-				enemyStats.Append(enemy4.giveHealth());*/
+			}
+			else {
+				outputs.Append("An unbreakable wall stops you from going that way. Try going a different way\n");
+				x = tempLocStorage[0];
+				y = tempLocStorage[1];
 			}
 		}
 	}
 
 	if (x == 1 && y == 1) {
-		outputs.Append("Enemy 1 Room");
-		enemyStats.Append(enemy1.giveName());
-		enemyStats.Append(" | ");
-		enemyStats.Append(enemy1.giveHealth());
+		outputs.Append("Enemy 1 Room\n");
+		if (enemy1.giveHealthFloat() >= 0.1) {
+			enemyStats.Append(enemy1.giveName());
+			enemyStats.Append(" | ");
+			enemyStats.Append(enemy1.giveHealth());
+		}
+		else {
+			enemyStats.Append("Enemy has been defeated\n");
+			outputs.Append("\nYOU HAVE BEAT THE BOSS ROOM!\nYOU WILL BE TELEPORTED BACK TO THE STARTING ROOM\nGOOD WORK\n\n");
+			enemy1Alive = false;
+			x = 3, y = 3;
+		}
 	}
 	else if (x == 5 && y == 1) {
-		outputs.Append("Enemy 2 Room");
+		outputs.Append("Enemy 2 Room\n");
 		enemyStats.Append(enemy2.giveName());
 		enemyStats.Append(" | ");
 		enemyStats.Append(enemy2.giveHealth());
 	}
 	else if (x == 5 && y == 5) {
-		outputs.Append("Enemy 3 Room");
+		outputs.Append("Enemy 3 Room\n");
 		enemyStats.Append(enemy3.giveName());
 		enemyStats.Append(" | ");
 		enemyStats.Append(enemy3.giveHealth());
 	}
 	else if (x == 1 && y == 5) {
-		outputs.Append("Enemy 4 Room");
+		outputs.Append("Enemy 4 Room\n");
 		enemyStats.Append(enemy4.giveName());
 		enemyStats.Append(" | ");
 		enemyStats.Append(enemy4.giveHealth());
@@ -448,7 +450,7 @@ void Game::HUD() {
 
 	String::WriteInColor(12, "\n______________________________\n\n");
 	if (!(enemyStats.EqualTo(""))) {
-		String::WriteInColor(414, enemyStats);
+		String::WriteInColor(79, enemyStats);
 		String::WriteInColor(12, "\n______________________________\n");
 	}
 
@@ -465,6 +467,6 @@ void Game::HUD() {
 	String::WriteInColor(8, "type \"command list\" to see all available inputs\n\n\n");
 	String::WriteInColor(1111, "\t\t\toutput box:\n");
 	outputs.Prepend("\t\t\t");
-	outputs.WriteInColor(1011, outputs);
+	outputs.WriteInColor(1111, outputs);
 	std::cout << std::endl;
 }

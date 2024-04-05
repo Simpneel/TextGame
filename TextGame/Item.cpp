@@ -37,12 +37,6 @@ const void Item::Description() const {
 	std::cout << "- ";
 	description.WriteToConsole();
 	std::cout << "\n";
-	/*if (isActive == true) {
-		String::WriteInColor(10, "You possess this item\n");
-	}
-	else {
-		String::WriteInColor(12, "You do not possess this item\n");
-	}*/
 	return void();
 }
 
@@ -54,7 +48,7 @@ void Item::Use() {
 	return void();
 }
 
-const void HealDrop::Description() const {
+const void HealDrop::Description() const  {
 	String::WriteInColor(13, "Healing Drop");
 	std::cout << "- ";
 	this->description.WriteToConsole();

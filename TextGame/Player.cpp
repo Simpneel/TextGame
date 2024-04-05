@@ -1,4 +1,5 @@
 #include "Player.h"
+#include <algorithm>
 
 Player::Player() {
 	name = "";
@@ -38,18 +39,11 @@ void Player::addSpell(String spellName) {
 	return void();
 }
 
+bool binSearchFunction(String i, String j) { return i < j; }
+
 bool Player::FindSpell(String spellname) {
-	spells.sort();
-	std::list<String>::iterator it;
-	for (it = spells.begin(); it != spells.end(); it++) {
-		if (spellname.EqualTo(*it)) {
-			return true;
-			break;
-		}
-		else {
-			return false;
-		}
-	}
+	std::sort(spells.begin(), spells.end(), binSearchFunction);
+	return std::binary_search(spells.begin(), spells.end(), spellname, binSearchFunction);
 }
 
 void Player::HUDSpellList() {
@@ -62,17 +56,8 @@ void Player::addItem(String itemName) {
 }
 
 bool Player::FindItem(String itemName) {
-	items.sort();
-	std::list<String>::iterator it;
-	for (it = items.begin(); it != items.end(); it++) {
-		if (itemName.EqualTo(*it)) {
-			return true;
-			break;
-		}
-		else {
-			return false;
-		}
-	}
+	std::sort(items.begin(), items.end(), binSearchFunction);
+	return std::binary_search(items.begin(), items.end(), itemName, binSearchFunction);
 }
 
 void Player::HUDItemList() {

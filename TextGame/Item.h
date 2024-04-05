@@ -16,8 +16,38 @@ public:
 	Item(String name, String description, bool isActive);
 	Item& operator=(const Item& item);
 	
-	const void Description() const;
-	void Use();
+	virtual const void Description() const;
+	virtual void Use();
+};
+
+class Apple : public Item {
+private:
+	String name;
+	String description;
+public:
+	Apple();
+	const void Description() const override;
+	void Use() override;
+};
+
+class Torch : public Item {
+private:
+	String name;
+	String description;
+public:
+	Torch();
+	const void Description() const override;
+	void Use() override;
+};
+
+class Satchel : public Item {
+private:
+	String name;
+	String description;
+public:
+	Satchel();
+	const void Description() const override;
+	void Use() override;
 };
 
 class HealDrop : public Item {
@@ -26,7 +56,7 @@ private:
 	int HealAmt = 50;
 	String description = "This item heals you for half of your maximum HP";
 public:
-	const void Description() const;
+	const void Description() const override;
 	int getCount();
 	void setCount(int newCount);
 	float Use(float playerHP);

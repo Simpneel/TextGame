@@ -4,7 +4,7 @@
 
 class Room {
 private:
-	Item* items;
+	Item* item;
 	String description;
 	int itemCount;
 	Spell spell;

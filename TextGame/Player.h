@@ -1,12 +1,11 @@
 #pragma once
-#include "String.h"
 #include "Item.h"
-#include <list>
+#include <vector>
 
 class Player {
 private:
-	std::list<String> spells;
-	std::list<String> items;
+	std::vector<String> spells;
+	std::vector<String> items;
 	float dmg;
 	String name;
 	float health;

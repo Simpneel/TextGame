@@ -8,7 +8,7 @@ Game::Game() {
 	
 	//North rooms
 	rooms[3][0] = Room("North room 3", exort);
-	rooms[3][1] = Room("North room 2", new Item[1]{ Item("Healing Drop", "This item can restore HP", healDrop1Activate) }, 1);
+	rooms[3][1] = Room("North room 2", &healdrop, 1);
 	rooms[3][2] = Room("North room 1", nullptr, 0);
 
 	//South rooms
@@ -19,13 +19,13 @@ Game::Game() {
 
 	//West rooms
 	rooms[2][3] = Room("West room 1", nullptr, 0);
-	rooms[1][3] = Room("West room 2", new Item[1]{ Item("Map","This item can show you all explored rooms", mapActivate) }, 1);
+	rooms[1][3] = Room("West room 2", &map, 1);
 	rooms[0][3] = Room("West room 3", nullptr, 0);
 
 	//East rooms
-	rooms[4][3] = Room("East room 1", new Item[1]{ Item("Healing Drop", "This item can restore HP", healDrop2Activate) }, 1);
+	rooms[4][3] = Room("East room 1", &healdrop, 1);
 	rooms[5][3] = Room("East room 2", nullptr, 0);
-	rooms[6][3] = Room("East room 3", new Item[1]{ Item("Shortstaff","This item increases the damage of attack based spells", shortstaffActivate) }, 1);
+	rooms[6][3] = Room("East room 3", &shortstaff, 1);
 
 	//Fight rooms
 	rooms[1][1] = Room("North West room");
@@ -46,6 +46,7 @@ void Game::Run() {
 	roomVisited[3][3] = true;
 
 	rooms[x][y].Description();
+	std::cout << "\n";
 
 	userInput.ReadFromConsole();
 	

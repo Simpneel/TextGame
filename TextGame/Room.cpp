@@ -1,7 +1,7 @@
 #include "Room.h"
 
 Room::Room() {
-	items = nullptr;
+	item = nullptr;
 	description = "";
 	itemCount = 0;
 }
@@ -9,20 +9,16 @@ Room::Room() {
 Room::Room(String description) {
 	this->description = description;
 	itemCount = 0;
-	items = nullptr;
+	item = nullptr;
 }
 
-Room::Room(String description, Item* items, int itemCount) {
+Room::Room(String description, Item* item, int itemCount) {
 	this->description = description;
 	if (itemCount == 0) {
 		this->description.Append("\nThis room has no items in it");
 	}
-	this->items = new Item[itemCount];
-	for (int i = 0; i < itemCount; i++) {
-		this->items[i] = items[i];
-	}
+	this->item = item;
 	this->itemCount = itemCount;
-	delete[] items;
 }
 
 Room::Room(String description, Spell& spell) {
@@ -33,33 +29,26 @@ Room::Room(String description, Spell& spell) {
 
 Room::Room(const Room& room) {
 	description = room.description;
-	items = new Item[room.itemCount];
-	for (int i = 0; i < room.itemCount; i++) {
-		items[i] = room.items[i];
-	}
+	item = room.item;
 	itemCount = room.itemCount;
 }
 
 Room& Room::operator=(const Room& room)
 {
-	delete[] items;
 	description = room.description;
-	items = new Item[room.itemCount];
-	for (int i = 0; i < room.itemCount; i++) {
-		items[i] = room.items[i];
-	}
+	item = room.item;
 	itemCount = room.itemCount;
 	return *this;
 }
 
 Room::~Room() {
-	delete[] items;
+
 }
 
 const void Room::Description() const {
 	description.WriteToConsole();
 	std::cout << "\n";
 	for (int i = 0; i < itemCount; i++) {
-		items[i].Description();
+		item[i].Description();
 	}
 }

@@ -7,6 +7,8 @@ class Game {
 public:
 	bool keepGameRunning = true;
 private:
+	size_t x, y;
+
 	String userInput;
 	String outputs;
 	String enemyStats;
@@ -23,7 +25,7 @@ private:
 	bool raActivate = false;
 	bool exortActivate = false;
 
-	size_t x, y;
+	
 	HealDrop healdrop;
 	Map map;
 	Shortstaff shortstaff;

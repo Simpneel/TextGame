@@ -44,13 +44,6 @@ Game::Game() {
 //}
 
 void Game::Run() {
-	if (player.giveHealth() == 0) {
-		String::WriteInColor(79, "YOU DIED\n");
-		String::WriteInColor(7, "Better luck next time!\n");
-		String::WriteInColor(7, "Game will close automatically in 10 seconds\n\nGives you some time to contemplate how you managed to lose a text based game.");
-		std::this_thread::sleep_for(std::chrono::seconds(4));
-		keepGameRunning = false;
-	}
 	outputs.Replace(outputs, "");
 	enemyStats.Replace(enemyStats, "");
 	roomVisited[3][3] = true;
@@ -61,6 +54,7 @@ void Game::Run() {
 	userInput.ReadFromConsole();
 	
 	String tempStorage = userInput;
+	float playerHP = player.giveHealth();
 
 	int tempLocStorage[2] = { x, y };
 
@@ -79,7 +73,6 @@ void Game::Run() {
 
 	userInput.ToLower();
 	std::cout << std::endl;
-
 
 	if (userInput == "move south") {
 		y ++;
@@ -329,10 +322,13 @@ void Game::Run() {
 			enemyStats.Append(enemy1.giveName());
 			enemyStats.Append(" | ");
 			enemyStats.Append(enemy1.giveHealth());
+			enemyStats.Append("\n attacked you!");
+			player.setHealth(player.giveHealth() - enemy1.doDamage());
 		}
 		else {
 			enemyStats.Append("Enemy has been defeated\n");
-			outputs.Append("\nYOU HAVE BEAT THE BOSS ROOM!\nYOU WILL BE TELEPORTED BACK TO THE STARTING ROOM\nGOOD WORK\n\n");
+			outputs.Append("\nYOU HAVE BEAT THE BOSS ROOM!\nYOU WILL BE TELEPORTED BACK TO THE STARTING ROOM\nYOU WILL BE HEALED FOR 30 HP\nGOOD WORK\n\n");
+			player.setHealth(playerHP + 30);
 			enemy1Alive = false;
 			x = 3, y = 3;
 		}
@@ -343,6 +339,8 @@ void Game::Run() {
 			enemyStats.Append(enemy2.giveName());
 			enemyStats.Append(" | ");
 			enemyStats.Append(enemy2.giveHealth());
+			enemyStats.Append("\n attacked you!");
+			player.setHealth(player.giveHealth() - enemy2.doDamage());
 		}
 		else {
 			enemyStats.Append("Enemy has been defeated\n");
@@ -357,6 +355,8 @@ void Game::Run() {
 			enemyStats.Append(enemy3.giveName());
 			enemyStats.Append(" | ");
 			enemyStats.Append(enemy3.giveHealth());
+			enemyStats.Append("\n attacked you!");
+			player.setHealth(player.giveHealth() - enemy3.doDamage());
 		}
 		else {
 			enemyStats.Append("Enemy has been defeated\n");
@@ -371,6 +371,8 @@ void Game::Run() {
 			enemyStats.Append(enemy4.giveName());
 			enemyStats.Append(" | ");
 			enemyStats.Append(enemy4.giveHealth());
+			enemyStats.Append("\n attacked you!");
+			player.setHealth(player.giveHealth() - enemy4.doDamage());
 		}
 		else {
 			enemyStats.Append("Enemy has been defeated\n");
@@ -436,6 +438,14 @@ void Game::Run() {
 			outputs.Append("You have acquired a new spell!\n\t\tSpell name: Ra\tSpell damage: N/A\nThis spell has special functionality\n");
 			player.addSpell("ra");
 		}
+	}
+
+	if (playerHP < 0) {
+		String::WriteInColor(79, "YOU DIED\n");
+		String::WriteInColor(7, "Better luck next time!\n");
+		String::WriteInColor(7, "Game will close automatically in 10 seconds\n\nGives you some time to contemplate how you managed to lose a text based game.");
+		std::this_thread::sleep_for(std::chrono::seconds(10));
+		keepGameRunning = false;
 	}
 
 	roomVisited[x][y] = true;

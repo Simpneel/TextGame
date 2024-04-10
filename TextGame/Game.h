@@ -7,6 +7,7 @@ public:
 	bool keepGameRunning = true;
 	bool gameWon = false;
 	String outputs;
+	int inputCount = 0;
 private:
 	size_t x, y;
 

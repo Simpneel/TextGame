@@ -52,6 +52,7 @@ void Game::Run() {
 	std::cout << "\n";
 
 	userInput.ReadFromConsole();
+	inputCount++;
 
 	String tempStorage = userInput;
 	double playerHP = player.giveHealth();

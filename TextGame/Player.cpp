@@ -125,7 +125,8 @@ String Enemy::giveName() {
 }
 
 String Enemy::giveHealth() {
-	return String(health);
+	int healthOutput = (int(health * 100 + .5) / 100);
+	return String(healthOutput);
 }
 
 float Enemy::giveHealthFloat() {

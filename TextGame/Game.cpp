@@ -101,10 +101,6 @@ void Game::Run() {
 			keepGameRunning = false;
 		}
 	}
-	else if (userInput == "tp") {
-		std::cin >> x;
-		std::cin >> y;
-	}
 	else if (userInput == "show map" && mapActivate == true) {
 		mapEnable = true;
 	}
@@ -186,6 +182,27 @@ void Game::Run() {
 		}
 		else {
 			outputs.Append("There is no enemy here to attack, what are you doing?\n");
+		}
+	}
+	else if (userInput == "dev hax") {
+		devHax = true;
+	}
+	else if (userInput == "tp" && devHax == true) {
+		std::cin >> x;
+		std::cin >> y;
+	}
+	else if (userInput == "instakill" && devHax == true) {
+		if (x == 1 && y == 1) {
+			enemy1.takeDamage(200);
+		}
+		else if (x == 5 && y == 1) {
+			enemy2.takeDamage(200);
+		}
+		else if (x == 5 && y == 5) {
+			enemy3.takeDamage(200);
+		}
+		else if (x == 1 && y == 5) {
+			enemy4.takeDamage(200);
 		}
 	}
 	else if (userInput == "cast spell") {
@@ -345,7 +362,7 @@ void Game::Run() {
 
 	if (x == 1 && y == 1) {
 		outputs.Append("Salt Room\n");
-		if (enemy1.giveHealthFloat() >= 0.1) {
+		if (enemy1.giveHealthFloat() >= 0.9) {
 			enemyStats.Append(enemy1.giveName());
 			enemyStats.Append(" | ");
 			enemyStats.Append(enemy1.giveHealth());
@@ -363,7 +380,7 @@ void Game::Run() {
 	}
 	else if (x == 5 && y == 1) {
 		outputs.Append("Cobalt Room\n");
-		if (enemy2.giveHealthFloat() >= 0.1) {
+		if (enemy2.giveHealthFloat() >= 0.9) {
 			enemyStats.Append(enemy2.giveName());
 			enemyStats.Append(" | ");
 			enemyStats.Append(enemy2.giveHealth());
@@ -380,7 +397,7 @@ void Game::Run() {
 	}
 	else if (x == 5 && y == 5) {
 		outputs.Append("Radium Room\n");
-		if (enemy3.giveHealthFloat() >= 0.1) {
+		if (enemy3.giveHealthFloat() >= 0.9) {
 			enemyStats.Append(enemy3.giveName());
 			enemyStats.Append(" | ");
 			enemyStats.Append(enemy3.giveHealth());
@@ -397,7 +414,7 @@ void Game::Run() {
 	}
 	else if (x == 1 && y == 5) {
 		outputs.Append("Xenon Room\n");
-		if (enemy4.giveHealthFloat() >= 0.1) {
+		if (enemy4.giveHealthFloat() >= 0.9) {
 			enemyStats.Append(enemy4.giveName());
 			enemyStats.Append(" | ");
 			enemyStats.Append(enemy4.giveHealth());
@@ -474,6 +491,9 @@ void Game::Run() {
 		keepGameRunning = false;
 	}
 	if (enemy1Alive == false && enemy2Alive == false && enemy3Alive == false && enemy4Alive == false) {
+		outputs.Append("\nWait a second\n\nyou killed everyone?\nOh wow you did.\nHow does it feel, murdering four people that were just minding their business\nAll because you found a couple of fancy looking spells\nAnyways\n");
+		HUD();
+		std::this_thread::sleep_for(std::chrono::seconds(10));
 		gameWon = true;
 	}
 	roomVisited[x][y] = true;

@@ -16,6 +16,7 @@ private:
 	bool roomVisited[7][7] = {false};
 	bool mapEnable = false;
 
+	bool devHax = false;
 
 	bool healDrop1Activate = false;
 	bool healDrop2Activate = false;

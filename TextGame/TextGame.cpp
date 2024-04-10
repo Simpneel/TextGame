@@ -29,6 +29,7 @@ int main() {
 
     newGame.setPlayer(newPlayer);
 
+    
     Enemy enemy1("Lanesra", 10, 100);
     Enemy enemy2("Kurt", 15.0, 80);
     Enemy enemy3("Ilton", 10.0, 110);

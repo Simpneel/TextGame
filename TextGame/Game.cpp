@@ -319,6 +319,11 @@ void Game::Run() {
 			outputs.Append("HIDE MAP- Hides the map from your screen\n");
 		}
 	}
+	else if (userInput == "help") {
+		String::WriteInColor(14, "You should try to explore all the rooms in each direction to begin with\nThere are only three rooms that extend in each direction from the starting room\nTo access the boss rooms, you must move perpendicular from the second room in any direction\n(for example, if you move west from North Room 2)\n");
+		String::WriteInColor(14, "\nBut make sure you have found atleast one spell and a few healing drops, or you will die very quickly.\nGood luck!\n");
+		std::this_thread::sleep_for(std::chrono::seconds(10));
+	}
 	else {
 		outputs.Append("Invalid input! Please use the given commands only\n\n");
 	}
@@ -560,7 +565,9 @@ void Game::HUD() {
 	}
 	std::cout << std::endl;
 	std::cout << "________--------_______";
-	std::cout << std::endl; std::cout << std::endl; 
+	std::cout << std::endl;
+	String::WriteInColor(8, "if you feel lost, type \"help\" for hints");
+	std::cout << std::endl << std::endl;
 	
 	String::WriteInColor(8, "type \"command list\" to see all available inputs\n\n\n");
 	std::cout << "\t\t\t\t\t\t\t\t";

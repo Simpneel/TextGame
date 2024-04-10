@@ -326,13 +326,13 @@ void Game::Run() {
 				x = 5; y = 5;
 				outputs.Append("\nYOU ENTERED AN ENEMY ROOM!\n");
 				outputs.Append("KILL THE ENEMY TO ESCAPE\n");
-				enemyStats.Append("Ilton: \n");
+				enemyStats.Append("Ilton: I use HAM(ilton) to beat those winged bulls and now I'll use it to beat you!\nI was given a knighthood cause of my speed so you won't see my attacks coming!\n");
 			}
 			else if (((x == 1 && y == 4) || (x == 2 && y == 5)) && enemy4Alive == true) {
 				x = 1; y = 5;
 				outputs.Append("\nYOU ENTERED AN ENEMY ROOM!\n");
 				outputs.Append("KILL THE ENEMY TO ESCAPE\n");
-				enemyStats.Append("Orion: \n");
+				enemyStats.Append("Orion: My belt is said to be as enchanting as the stars in the sky.\nIs it in your constellations to handle it's power?\n");
 
 			}
 			else {
@@ -353,7 +353,8 @@ void Game::Run() {
 			player.setHealth(player.giveHealth() - enemy1.doDamage());
 		}
 		else {
-			enemyStats.Append("Lanesra has been defeated\n");
+			enemyStats.Append("Lanesra: Beaten once again by some scrubs, why does this always happen to me?");
+			enemyStats.Append("\nLanesra has been defeated\n");
 			outputs.Append("\nYOU HAVE BEAT THE BOSS ROOM!\nYOU WILL BE TELEPORTED BACK TO THE STARTING ROOM\nYOU WILL BE HEALED FOR 30 HP\nGOOD WORK\n\n");
 			player.setHealth(playerHP + 30);
 			enemy1Alive = false;
@@ -370,7 +371,8 @@ void Game::Run() {
 			player.setHealth(player.giveHealth() - enemy2.doDamage());
 		}
 		else {
-			enemyStats.Append("Kurt has been defeated\n");
+			enemyStats.Append("Kurt: This fight went harder than any of my songs ever did");
+			enemyStats.Append("\nKurt has been defeated\n");
 			outputs.Append("\nYOU HAVE BEAT THE BOSS ROOM!\nYOU WILL BE TELEPORTED BACK TO THE STARTING ROOM\nGOOD WORK\n\n");
 			enemy2Alive = false;
 			x = 3, y = 3;
@@ -386,7 +388,8 @@ void Game::Run() {
 			player.setHealth(player.giveHealth() - enemy3.doDamage());
 		}
 		else {
-			enemyStats.Append("Ilton has been defeated\n");
+			enemyStats.Append("Ilton: NO NO NO THIS CAN'T BE HAPPENING!\nI WAS MEANT TO BE WORLD CHAMPION AGAIN!");
+			enemyStats.Append("\nIlton has been defeated\n");
 			outputs.Append("\nYOU HAVE BEAT THE BOSS ROOM!\nYOU WILL BE TELEPORTED BACK TO THE STARTING ROOM\nGOOD WORK\n\n");
 			enemy3Alive = false;
 			x = 3, y = 3;
@@ -402,7 +405,8 @@ void Game::Run() {
 			player.setHealth(player.giveHealth() - enemy4.doDamage());
 		}
 		else {
-			enemyStats.Append("Orion has been defeated\n");
+			enemyStats.Append("Orion: I'll be back in a year. If you wish to find me, just look up.");
+			enemyStats.Append("\nOrion has been defeated\n");
 			outputs.Append("\nYOU HAVE BEAT THE BOSS ROOM!\nYOU WILL BE TELEPORTED BACK TO THE STARTING ROOM\nGOOD WORK\n\n");
 			enemy4Alive = false;
 			x = 3, y = 3;

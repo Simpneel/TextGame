@@ -4,9 +4,7 @@
 #ifndef CUSTOM_STRING_HEADER
 #define CUSTOM_STRING_HEADER
 
-#include <iostream>
-#include <cstring>
-#include <cctype>
+
 
 
 class String

@@ -2,6 +2,9 @@
 #include <ostream>
 #include <Windows.h>
 #include <charconv>
+#include <iostream>
+#include <cstring>
+#include <cctype>
 
 String::String() {
 	str = new char[1] {'\0'};						//Initialise a new string  

@@ -6,18 +6,18 @@ class Player {
 private:
 	std::vector<String> spells;
 	std::vector<String> items;
-	float dmg;
+	double dmg;
 	String name;
-	float health;
+	double health;
 
 public:
 	Player();
-	Player(String playerName, float dmg, float health);
+	Player(String playerName, double dmg, double health);
 	~Player();
 	String giveName();
-	float giveHealth();
-	float giveDamage();
-	void setHealth(float newHealth);
+	double giveHealth();
+	double giveDamage();
+	void setHealth(double newHealth);
 
 	void addSpell(String spellName);
 	bool FindSpell(String spellName);
@@ -31,16 +31,16 @@ public:
 class Enemy : public Player {
 private:
 	String name;
-	float health;
-	float dmg;
+	double health;
+	double dmg;
 public:
 	Enemy();
-	Enemy(String name, float dmg, float health);
+	Enemy(String name, double dmg, double health);
 	String giveName();
 	String giveHealth();
-	float giveHealthFloat();
-	float doDamage();
-	void takeDamage(float dmgDone);
+	double giveHealthdouble() const;
+	double doDamage();
+	void takeDamage(double dmgDone);
 };
 
 

@@ -13,7 +13,7 @@ public:
 	String();
 	String(const char* _str);
 	String(const String& _other);
-	String(const float _str);
+	String(const double _str);
 	~String();
 
 public:
@@ -39,7 +39,7 @@ public:
 	String& ReadFromConsole();
 	String& WriteToConsole();
 	static void WriteInColor(unsigned short colorCode, String outputStr);
-	static void WriteInColor(unsigned short colorCode, float outputFloat);
+	static void WriteInColor(unsigned short colorCode, double outputdouble);
 	const String& WriteToConsole() const;
 
 public:

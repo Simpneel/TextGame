@@ -8,7 +8,7 @@ Spell::Spell() {
 Spell::~Spell() {
 }
 
-Spell::Spell(String name, float damage) {
+Spell::Spell(String name, double damage) {
 	this->name = name;
 	this->damage = damage;
 }

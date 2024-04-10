@@ -5,12 +5,12 @@
 class Spell {
 private:
 	String name;
-	float damage = 0;
+	double damage = 0;
 
 public:
 	Spell();
 	~Spell();
-	Spell(String name, float damage);
+	Spell(String name, double damage);
 	void Cast();
 	static bool Compare(Spell a, Spell b);
 };
@@ -18,7 +18,7 @@ public:
 class Desolate : public Spell {
 private:
 	String name = "Desolate";
-	float damage = 10;
+	double damage = 10;
 public:
 	void Cast(Enemy& enemy);
 	void increaseDmg();
@@ -27,7 +27,7 @@ public:
 class Exort : public Spell {
 private:
 	String name = "Exort";
-	float damage = 20;
+	double damage = 20;
 public:
 	void Cast(Enemy& enemy);
 	void increaseDmg();
@@ -36,7 +36,7 @@ public:
 class Ra : public Spell {
 private:
 	String name = "Ra";
-	float damage = 0;
+	double damage = 0;
 public:
 	void Cast(Player& player, Enemy& enemy);
 };

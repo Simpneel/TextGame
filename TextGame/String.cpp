@@ -16,9 +16,9 @@ String::String(const char* _str) {					//Initialising a new string using a chara
 	strncpy(str, _str, strLength);
 }
 
-String::String(const float _str) {
+String::String(const double _double) {
 	char cVal[128] {};
-	std::to_chars(std::begin(cVal), std::end(cVal), _str);
+	std::to_chars(std::begin(cVal), std::end(cVal), _double);
 	size_t strLength = strlen(cVal) + 1;
 	str = new char[strLength];
 	strncpy(str, cVal, strLength);
@@ -68,6 +68,7 @@ String& String::Append(const String& _str) {		//Using strncpy and strncat from c
 	size_t newLen = Length() + _str.Length() + 1;	//and enters it into the back of the current existing string
 	char* strCopy = new char[newLen] {};			//and returns the same 
 	strncpy(strCopy, str, Length());
+	strCopy[newLen - 1] = 0;
 	strncat(strCopy, _str.str, _str.Length());
 	delete[] str;
 	str = strCopy;
@@ -78,6 +79,7 @@ String& String::Prepend(const String& _str) {		//Using the same concept as appen
 	size_t newLen = Length() + _str.Length() + 1;	//but enters it into the start of the current string instead
 	char* strCopy = new char[newLen] {};			//by swapping which values get entered into the strCopy var first
 	strncpy(strCopy, _str.str, _str.Length());
+	strCopy[newLen - 1] = 0;
 	strncat(strCopy, str, Length());
 	delete[] str;
 	str = strCopy;
@@ -125,16 +127,16 @@ size_t String::Find(size_t _startIndex, const String& _str) {			//Overloading of
 }
 
 String& String::Replace(const String& _find, const String& _replace) {  //Replaces every instance of a given substring in the main string 
-	int findLen = _find.Length();
-	int replaceLen = _replace.Length();
+	size_t findLen = _find.Length();
+	size_t replaceLen = _replace.Length();
 	int replaceCount = 0;
 	for (size_t i = 0; (Find(i, _find) != -1); i += Find(i, _find) + 1) {
 		replaceCount++;
 	}
 	size_t newLen = Length() + ((replaceLen - findLen) * replaceCount) + 1;
 	char* newStr = new char[newLen] {};
-	int findIndex = Find(_find);
-	int strCounter = 0;
+	size_t findIndex = Find(_find);
+	size_t strCounter = 0;
 	if (findIndex == -1 || _find.Length() == 0) {
 		return *this;
 	}
@@ -217,10 +219,10 @@ void String::WriteInColor(unsigned short colorCode, String outputStr) {
 	return void();
 }
 
-void String::WriteInColor(unsigned short colorCode, float outputFloat) {
+void String::WriteInColor(unsigned short colorCode, double outputdouble) {
 	HANDLE hcon = GetStdHandle(STD_OUTPUT_HANDLE);
 	SetConsoleTextAttribute(hcon, colorCode);
-	std::cout << outputFloat;
+	std::cout << outputdouble;
 	SetConsoleTextAttribute(hcon, 07);
 	return void();
 }

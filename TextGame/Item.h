@@ -59,7 +59,7 @@ public:
 	const void Description() const override;
 	int getCount();
 	void setCount(int newCount);
-	float Use(float playerHP);
+	double Use(double playerHP);
 };
 
 class Map : public Item {
@@ -75,8 +75,8 @@ public:
 class Shortstaff : public Item {
 private:
 	String description = "This item increases the damage of all spells you use by 20%";
-	float dmgInc=0.33;
+	double dmgInc=0.33;
 public:
 	const void Description() const;
-	float Use(float baseDmg);
+	double Use(double baseDmg);
 };

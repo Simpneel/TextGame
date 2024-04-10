@@ -55,5 +55,4 @@ public:
 	void setPlayer(Player player);
 	void HUD();
 	void Run();
-	static void addToOutput(String output);
 };

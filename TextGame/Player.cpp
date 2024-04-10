@@ -7,7 +7,7 @@ Player::Player() {
 	health = 0;
 }
 
-Player::Player(String playerName, float dmg, float health) {
+Player::Player(String playerName, double dmg, double health) {
 	this->health = health;
 	name = playerName;
 	this->dmg = dmg;
@@ -21,15 +21,15 @@ String Player::giveName() {
 	return name;
 }
 
-float Player::giveHealth() {
+double Player::giveHealth() {
 	return health;
 }
 
-float Player::giveDamage() {
+double Player::giveDamage() {
 	return dmg;
 }
 
-void Player::setHealth(float newHealth) {
+void Player::setHealth(double newHealth) {
 	health = newHealth;
 	return void();
 }
@@ -114,7 +114,7 @@ Enemy::Enemy() {
 	dmg = 0.0;
 }
 
-Enemy::Enemy(String name, float dmg, float health) {
+Enemy::Enemy(String name, double dmg, double health) {
 	this->name = name;
 	this->health = health;
 	this->dmg = dmg;
@@ -125,19 +125,19 @@ String Enemy::giveName() {
 }
 
 String Enemy::giveHealth() {
-	int healthOutput = (int(health * 100 + .5) / 100);
+	int healthOutput = int(health * 100 + .5) / 100;
 	return String(healthOutput);
 }
 
-float Enemy::giveHealthFloat() {
+double Enemy::giveHealthdouble() const {
 	return health;
 }
 
-float Enemy::doDamage() {
+double Enemy::doDamage() {
 	return dmg;
 }
 
-void Enemy::takeDamage(float dmgDone) {
+void Enemy::takeDamage(double dmgDone) {
 	health = health - dmgDone;
 	return void();
 }

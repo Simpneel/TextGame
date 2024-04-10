@@ -129,7 +129,7 @@ void HealDrop::setCount(int newCount) {
 	return void();
 }
 
-float HealDrop::Use(float playerHP) {
+double HealDrop::Use(double playerHP) {
 	if (count > 0) {
 		return playerHP + HealAmt;
 		count--;
@@ -218,6 +218,6 @@ const void Shortstaff::Description() const {
 	return void();
 }
 
-float Shortstaff::Use(float baseDmg) {
+double Shortstaff::Use(double baseDmg) {
 		return baseDmg + (baseDmg * dmgInc);
 }

@@ -54,9 +54,9 @@ void Game::Run() {
 	userInput.ReadFromConsole();
 
 	String tempStorage = userInput;
-	float playerHP = player.giveHealth();
+	double playerHP = player.giveHealth();
 
-	int tempLocStorage[2] = { x, y };
+	size_t tempLocStorage[2] = { x, y };
 
 	int invalidRoomIndexes[32][2] = {						//Commenting out the rooms that allow me to skip through to the diagonal rooms
 		{0,0},{1,0},{2,0},{4,0},{5,0},{6,0},
@@ -70,6 +70,15 @@ void Game::Run() {
 	int diagonalRoomEntry[8][2] = {
 		{2,1},{1,2},{4,1},{5,2},{1,4},{2,5},{4,5},{5,4}
 	};
+
+	if (playerHP < 0) {
+		std::cout << "\t\t\t\t\t\t\t\t";
+		String::WriteInColor(79, "YOU DIED\n"); std::cout << "\t\t\t\t\t\t\t\t";
+		String::WriteInColor(7, "Better luck next time!\n"); std::cout << "\t\t\t\t\t\t\t\t";
+		String::WriteInColor(7, "Game will close automatically in 10 seconds\n\nGives you some time to contemplate how you managed to lose a text based game.");
+		std::this_thread::sleep_for(std::chrono::seconds(10));
+		keepGameRunning = false;
+	}
 
 	userInput.ToLower();
 	std::cout << std::endl;
@@ -362,7 +371,7 @@ void Game::Run() {
 
 	if (x == 1 && y == 1) {
 		outputs.Append("Salt Room\n");
-		if (enemy1.giveHealthFloat() >= 0.9) {
+		if (enemy1.giveHealthdouble() >= 0.9) {
 			enemyStats.Append(enemy1.giveName());
 			enemyStats.Append(" | ");
 			enemyStats.Append(enemy1.giveHealth());
@@ -380,7 +389,7 @@ void Game::Run() {
 	}
 	else if (x == 5 && y == 1) {
 		outputs.Append("Cobalt Room\n");
-		if (enemy2.giveHealthFloat() >= 0.9) {
+		if (enemy2.giveHealthdouble() >= 0.9) {
 			enemyStats.Append(enemy2.giveName());
 			enemyStats.Append(" | ");
 			enemyStats.Append(enemy2.giveHealth());
@@ -397,7 +406,7 @@ void Game::Run() {
 	}
 	else if (x == 5 && y == 5) {
 		outputs.Append("Radium Room\n");
-		if (enemy3.giveHealthFloat() >= 0.9) {
+		if (enemy3.giveHealthdouble() >= 0.9) {
 			enemyStats.Append(enemy3.giveName());
 			enemyStats.Append(" | ");
 			enemyStats.Append(enemy3.giveHealth());
@@ -414,7 +423,7 @@ void Game::Run() {
 	}
 	else if (x == 1 && y == 5) {
 		outputs.Append("Xenon Room\n");
-		if (enemy4.giveHealthFloat() >= 0.9) {
+		if (enemy4.giveHealthdouble() >= 0.9) {
 			enemyStats.Append(enemy4.giveName());
 			enemyStats.Append(" | ");
 			enemyStats.Append(enemy4.giveHealth());
@@ -483,13 +492,7 @@ void Game::Run() {
 		}
 	}
 
-	if (playerHP < 0) {
-		String::WriteInColor(79, "YOU DIED\n");
-		String::WriteInColor(7, "Better luck next time!\n");
-		String::WriteInColor(7, "Game will close automatically in 10 seconds\n\nGives you some time to contemplate how you managed to lose a text based game.");
-		std::this_thread::sleep_for(std::chrono::seconds(10));
-		keepGameRunning = false;
-	}
+	
 	if (enemy1Alive == false && enemy2Alive == false && enemy3Alive == false && enemy4Alive == false) {
 		outputs.Append("\nWait a second\n\nyou killed everyone?\nOh wow you did.\nHow does it feel, murdering four people that were just minding their business\nAll because you found a couple of fancy looking spells\nAnyways\n");
 		HUD();
@@ -513,10 +516,12 @@ void Game::setEnemies(Enemy enemy1, Enemy enemy2, Enemy enemy3, Enemy enemy4) {
 
 void Game::HUD() {
 	system("cls");
-	float HUDhealth = player.giveHealth();
+	double HUDhealth = player.giveHealth();
+	std::cout << "\t\t\t\t\t\t\t\t";
 	String::WriteInColor(10, "~~~~~~~~");
 	std::cout << "\t";
 	String::WriteInColor(5, " ~~~~~~~~\n");
+	std::cout << "\t\t\t\t\t\t\t\t";
 	std::cout << "     ";
 	String::WriteInColor(10, HUDhealth);
 	String::WriteInColor(10, " | ");
@@ -526,19 +531,22 @@ void Game::HUD() {
 	String::WriteInColor(5, "| ");
 	String::WriteInColor(5, player.giveName());
 	std::cout << "\n";
+	std::cout << "\t\t\t\t\t\t\t\t";
 	String::WriteInColor(10, "~~~~~~~~");
 	std::cout << "\t";
 	String::WriteInColor(5, " ~~~~~~~~\n");
-	std::cout << x << " " << y << std::endl;
+	//std::cout << x << " " << y << std::endl;
 	String printItems = player.HUDItemList();
 	String printSpells = player.HUDSpellList();
+	std::cout << "\t\t\t\t\t\t\t\t\t\t\t\t\t";
 	std::cout << "items in inventory: ";
 	String::WriteInColor(11, printItems);
 	std::cout << std::endl;
+	std::cout << "\t\t\t\t\t\t\t\t\t\t\t\t\t";
 	std::cout << "spells learned: ";
 	String::WriteInColor(11, printSpells);
 
-	String::WriteInColor(12, "\n______________________________\n");
+	String::WriteInColor(12, "\n______________________________\n\n");
 	if (!(enemyStats.EqualTo(""))) {
 		String::WriteInColor(79, enemyStats);
 		String::WriteInColor(12, "\n______________________________\n");
@@ -555,8 +563,9 @@ void Game::HUD() {
 	std::cout << std::endl; std::cout << std::endl; 
 	
 	String::WriteInColor(8, "type \"command list\" to see all available inputs\n\n\n");
-	String::WriteInColor(1111, "\t\t\toutput box:\n");
-	outputs.Prepend("\t\t\t");
+	std::cout << "\t\t\t\t\t\t\t\t";
+	String::WriteInColor(1111, "output box:\n");
+	std::cout << "\t\t\t\t\t\t\t\t";
 	outputs.WriteInColor(1111, outputs);
 	std::cout << std::endl;
 }

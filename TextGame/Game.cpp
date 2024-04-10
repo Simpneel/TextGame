@@ -52,7 +52,7 @@ void Game::Run() {
 	std::cout << "\n";
 
 	userInput.ReadFromConsole();
-	
+
 	String tempStorage = userInput;
 	float playerHP = player.giveHealth();
 
@@ -60,11 +60,11 @@ void Game::Run() {
 
 	int invalidRoomIndexes[32][2] = {						//Commenting out the rooms that allow me to skip through to the diagonal rooms
 		{0,0},{1,0},{2,0},{4,0},{5,0},{6,0},
-		{0,1},/*{2,1},{4,1},*/{6,1},	
+		{0,1},/*{2,1},{4,1},*/{6,1},
 		{0,2}/*,{1,2}*/,{2,2},{4,2},/*{5,2},*/{6,2},
 		{0,4},/*{1,4},*/{2,4},{4,4},/*{5,4},*/{6,4},
 		{0,5},/*{2,5},{4,5},*/{6,5},
-		{0,6},{1,6},{2,6},{4,6},{5,6},{6,6} 
+		{0,6},{1,6},{2,6},{4,6},{5,6},{6,6}
 	};
 
 	int diagonalRoomEntry[8][2] = {
@@ -75,7 +75,7 @@ void Game::Run() {
 	std::cout << std::endl;
 
 	if (userInput == "move south") {
-		y ++;
+		y++;
 	}
 	else if (userInput == "move north") {
 		y--;
@@ -189,7 +189,7 @@ void Game::Run() {
 		}
 	}
 	else if (userInput == "cast spell") {
-		String::WriteInColor(14,"\nEnter spell name to cast\n");
+		String::WriteInColor(14, "\nEnter spell name to cast\n");
 		String tempInput;
 		tempInput.ReadFromConsole();
 		tempInput.ToLower();
@@ -198,7 +198,7 @@ void Game::Run() {
 				if (x == 1 && y == 1) {
 					outputs.Append(enemy1.giveName());
 					outputs.Append(" was hit!\n");
-					desolate.Cast(enemy1);					
+					desolate.Cast(enemy1);
 				}
 				else if (x == 5 && y == 1) {
 					outputs.Append(enemy2.giveName());
@@ -235,7 +235,7 @@ void Game::Run() {
 					outputs.Append(" was hit!\n");
 					exort.Cast(enemy3);
 				}
-				else if (x == 1 && y == 5){
+				else if (x == 1 && y == 5) {
 					outputs.Append(enemy4.giveName());
 					outputs.Append(" was hit!\n");
 					exort.Cast(enemy4);
@@ -387,7 +387,7 @@ void Game::Run() {
 			healDrop1Activate = true;
 			outputs.Append("You have obtained two healing drops!\n");
 			player.addItem("healing drop");
-			healdrop.setCount((healdrop.getCount()+2));
+			healdrop.setCount((healdrop.getCount() + 2));
 		}
 	}
 	if (x == 1 && y == 3) {
@@ -401,7 +401,6 @@ void Game::Run() {
 		if (healDrop2Activate != true) {
 			healDrop2Activate = true;
 			outputs.Append("You have obtained two healing drops!\n");
-			player.addItem("healing drop");
 			healdrop.setCount((healdrop.getCount() + 2));
 		}
 	}
@@ -410,12 +409,8 @@ void Game::Run() {
 			shortstaffActivate = true;
 			outputs.Append("You have obtained a shortstaff!\nThis item equips automatically and increases your spell damage!\n");
 			player.addItem("shortstaff");
-			if (desolateActivate) {
-				desolate.increaseDmg();
-			}
-			if (exortActivate) {
-				exort.increaseDmg();
-			}
+			desolate.increaseDmg();
+			exort.increaseDmg();
 		}
 	}
 	if (x == 3 && y == 0) {
@@ -481,8 +476,15 @@ void Game::HUD() {
 	String::WriteInColor(10, "~~~~~~~~");
 	std::cout << "\t";
 	String::WriteInColor(5, " ~~~~~~~~\n");
+	String printItems = player.HUDItemList();
+	String printSpells = player.HUDSpellList();
+	std::cout << "items in inventory: ";
+	String::WriteInColor(11, printItems);
+	std::cout << std::endl;
+	std::cout << "spells learned: ";
+	String::WriteInColor(11, printSpells);
 
-	String::WriteInColor(12, "\n______________________________\n\n");
+	String::WriteInColor(12, "\n______________________________\n");
 	if (!(enemyStats.EqualTo(""))) {
 		String::WriteInColor(79, enemyStats);
 		String::WriteInColor(12, "\n______________________________\n");

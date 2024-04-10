@@ -21,11 +21,11 @@ public:
 
 	void addSpell(String spellName);
 	bool FindSpell(String spellName);
-	void HUDSpellList();
+	String HUDSpellList();
 
 	void addItem(String itemName);
 	bool FindItem(String itemName);
-	void HUDItemList();
+	String HUDItemList();
 };
 
 class Enemy : public Player {

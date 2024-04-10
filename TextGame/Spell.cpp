@@ -46,7 +46,7 @@ void Exort::increaseDmg() {
 	damage = shortstaff.Use(damage);
 }
 
-void Ra::Cast() {
-
+void Ra::Cast(Player player) {
+	player.setHealth(player.giveHealth() + 25);
 	return void();
 }

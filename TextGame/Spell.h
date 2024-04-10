@@ -27,7 +27,7 @@ public:
 class Exort : public Spell {
 private:
 	String name = "Exort";
-	float damage = 15;
+	float damage = 20;
 public:
 	void Cast(Enemy& enemy);
 	void increaseDmg();
@@ -38,5 +38,5 @@ private:
 	String name = "Ra";
 	float damage = 0;
 public:
-	void Cast();
+	void Cast(Player player);
 };

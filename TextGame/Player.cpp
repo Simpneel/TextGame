@@ -60,8 +60,15 @@ bool Player::FindSpell(String spellname) {
 	return false;
 }
 
-void Player::HUDSpellList() {
-
+String Player::HUDSpellList() {
+	String spellList;
+	std::vector<String>::iterator it = spells.begin();
+	while (it != spells.end()) {
+		spellList.Append(*it);
+		spellList.Append(" ");
+		it++;
+	}
+	return spellList;
 }
 
 void Player::addItem(String itemName) {
@@ -90,8 +97,15 @@ bool Player::FindItem(String itemName) {
 	return false;
 }
 
-void Player::HUDItemList() {
-
+String Player::HUDItemList() {
+	String itemList;
+	std::vector<String>::iterator it = items.begin();
+	while (it != items.end()) {
+		itemList.Append(*it);
+		itemList.Append(" ");
+		it++;
+	}
+	return itemList;
 }
 
 Enemy::Enemy() {

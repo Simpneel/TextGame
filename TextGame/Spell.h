@@ -38,5 +38,5 @@ private:
 	String name = "Ra";
 	float damage = 0;
 public:
-	void Cast(Player player);
+	void Cast(Player& player, Enemy& enemy);
 };

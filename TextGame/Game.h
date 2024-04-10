@@ -5,6 +5,7 @@
 class Game {
 public:
 	bool keepGameRunning = true;
+	bool gameWon = false;
 	String outputs;
 private:
 	size_t x, y;

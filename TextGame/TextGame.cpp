@@ -30,12 +30,19 @@ int main() {
     newGame.setPlayer(newPlayer);
 
     Enemy enemy1("Lanesra", 10, 100);
-    Enemy enemy2("Enemy 2", 15.0, 80);
-    Enemy enemy3("Enemy 3", 10.0, 110);
-    Enemy enemy4("Enemy 4", 12.0, 120);
+    Enemy enemy2("Kurt", 15.0, 80);
+    Enemy enemy3("Ilton", 10.0, 110);
+    Enemy enemy4("Orion", 12.0, 120);
     newGame.setEnemies(enemy1, enemy2, enemy3, enemy4);
 
     while (newGame.keepGameRunning) {
         newGame.Run();
+        if (newGame.gameWon) {
+            system("cls");
+            String::WriteInColor(10, "______________________________________________________________________");
+            String::WriteInColor(10, "\n\n\t\t\t\t\t\tYOU WON THE GAME, CONGRATULATIONS!\n\n\n\t\t\t\t\t\tnow what?\n\n");
+            String::WriteInColor(10, "______________________________________________________________________");
+            break;
+        }
     }
 }

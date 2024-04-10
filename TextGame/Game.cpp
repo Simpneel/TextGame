@@ -31,10 +31,10 @@ Game::Game() {
 	rooms[6][3] = Room("East room 3", &shortstaff, 1);
 
 	//Fight rooms
-	rooms[1][1] = Room("North West room");
-	rooms[5][1] = Room("North East room");
-	rooms[5][5] = Room("South East room");
-	rooms[1][5] = Room("South West room");
+	rooms[1][1] = Room("Salt Room");
+	rooms[5][1] = Room("Cobalt Room");
+	rooms[5][5] = Room("Radium Room");
+	rooms[1][5] = Room("Xenon Room");
 	userInput = "";
 	enemyStats = "";
 }
@@ -245,7 +245,29 @@ void Game::Run() {
 				}
 			}
 			else if (tempInput == "ra" && raActivate == true) {
-
+				if (x == 1 && y == 1) {
+					outputs.Append(enemy1.giveName());
+					outputs.Append(" was hit!\n");
+					ra.Cast(player, enemy1);
+				}
+				else if (x == 5 && y == 1) {
+					outputs.Append(enemy2.giveName());
+					outputs.Append(" was hit!\n");
+					ra.Cast(player, enemy2);
+				}
+				else if (x == 5 && y == 5) {
+					outputs.Append(enemy3.giveName());
+					outputs.Append(" was hit!\n");
+					ra.Cast(player, enemy3);
+				}
+				else if (x == 1 && y == 5) {
+					outputs.Append(enemy4.giveName());
+					outputs.Append(" was hit!\n");
+					ra.Cast(player, enemy4);
+				}
+				else {
+					outputs.Append("Who are you casting this on?\n\t\t\tNo enemies nearby\n");
+				}
 			}
 			else {
 				outputs.Append("Unknown spell.\n You either do not have this spell or you typed the wrong spell name.\n");
@@ -292,21 +314,26 @@ void Game::Run() {
 				x = 1; y = 1;
 				outputs.Append("\nYOU ENTERED AN ENEMY ROOM!\n");
 				outputs.Append("KILL THE ENEMY TO ESCAPE\n");
+				enemyStats.Append("Lanesra: I'm going to use these brass knuckles to make you feel the pain I feel every day!\nI want your face to look as red as my Valorant career tab's red carpet...\n");
 			}
 			else if (((x == 4 && y == 1) || (x == 5 && y == 2)) && enemy2Alive == true) {
 				x = 5; y = 1;
 				outputs.Append("\nYOU ENTERED AN ENEMY ROOM!\n");
 				outputs.Append("KILL THE ENEMY TO ESCAPE\n");
+				enemyStats.Append("Kurt: My guitar has a shotgun built into it!\nI'll make sure it blows your head off before it blows mine off!\n");
 			}
-			else if (((x == 1 && y == 4) || (x == 2 && y == 5)) && enemy3Alive == true) {
-				x = 1; y = 5;
-				outputs.Append("\nYOU ENTERED AN ENEMY ROOM!\n");
-				outputs.Append("KILL THE ENEMY TO ESCAPE\n");
-			}
-			else if (((x == 4 && y == 5) || (x == 5 && y == 4)) && enemy4Alive == true) {
+			else if (((x == 4 && y == 5) || (x == 5 && y == 4)) && enemy3Alive == true) {
 				x = 5; y = 5;
 				outputs.Append("\nYOU ENTERED AN ENEMY ROOM!\n");
 				outputs.Append("KILL THE ENEMY TO ESCAPE\n");
+				enemyStats.Append("Ilton: \n");
+			}
+			else if (((x == 1 && y == 4) || (x == 2 && y == 5)) && enemy4Alive == true) {
+				x = 1; y = 5;
+				outputs.Append("\nYOU ENTERED AN ENEMY ROOM!\n");
+				outputs.Append("KILL THE ENEMY TO ESCAPE\n");
+				enemyStats.Append("Orion: \n");
+
 			}
 			else {
 				outputs.Append("An unbreakable wall stops you from going that way. Try going a different way\n");
@@ -317,7 +344,7 @@ void Game::Run() {
 	}
 
 	if (x == 1 && y == 1) {
-		outputs.Append("Enemy 1 Room\n");
+		outputs.Append("Salt Room\n");
 		if (enemy1.giveHealthFloat() >= 0.1) {
 			enemyStats.Append(enemy1.giveName());
 			enemyStats.Append(" | ");
@@ -326,7 +353,7 @@ void Game::Run() {
 			player.setHealth(player.giveHealth() - enemy1.doDamage());
 		}
 		else {
-			enemyStats.Append("Enemy has been defeated\n");
+			enemyStats.Append("Lanesra has been defeated\n");
 			outputs.Append("\nYOU HAVE BEAT THE BOSS ROOM!\nYOU WILL BE TELEPORTED BACK TO THE STARTING ROOM\nYOU WILL BE HEALED FOR 30 HP\nGOOD WORK\n\n");
 			player.setHealth(playerHP + 30);
 			enemy1Alive = false;
@@ -334,7 +361,7 @@ void Game::Run() {
 		}
 	}
 	else if (x == 5 && y == 1) {
-		outputs.Append("Enemy 2 Room\n");
+		outputs.Append("Cobalt Room\n");
 		if (enemy2.giveHealthFloat() >= 0.1) {
 			enemyStats.Append(enemy2.giveName());
 			enemyStats.Append(" | ");
@@ -343,14 +370,14 @@ void Game::Run() {
 			player.setHealth(player.giveHealth() - enemy2.doDamage());
 		}
 		else {
-			enemyStats.Append("Enemy has been defeated\n");
+			enemyStats.Append("Kurt has been defeated\n");
 			outputs.Append("\nYOU HAVE BEAT THE BOSS ROOM!\nYOU WILL BE TELEPORTED BACK TO THE STARTING ROOM\nGOOD WORK\n\n");
 			enemy2Alive = false;
 			x = 3, y = 3;
 		}
 	}
 	else if (x == 5 && y == 5) {
-		outputs.Append("Enemy 3 Room\n");
+		outputs.Append("Radium Room\n");
 		if (enemy3.giveHealthFloat() >= 0.1) {
 			enemyStats.Append(enemy3.giveName());
 			enemyStats.Append(" | ");
@@ -359,14 +386,14 @@ void Game::Run() {
 			player.setHealth(player.giveHealth() - enemy3.doDamage());
 		}
 		else {
-			enemyStats.Append("Enemy has been defeated\n");
+			enemyStats.Append("Ilton has been defeated\n");
 			outputs.Append("\nYOU HAVE BEAT THE BOSS ROOM!\nYOU WILL BE TELEPORTED BACK TO THE STARTING ROOM\nGOOD WORK\n\n");
 			enemy3Alive = false;
 			x = 3, y = 3;
 		}
 	}
 	else if (x == 1 && y == 5) {
-		outputs.Append("Enemy 4 Room\n");
+		outputs.Append("Xenon Room\n");
 		if (enemy4.giveHealthFloat() >= 0.1) {
 			enemyStats.Append(enemy4.giveName());
 			enemyStats.Append(" | ");
@@ -375,7 +402,7 @@ void Game::Run() {
 			player.setHealth(player.giveHealth() - enemy4.doDamage());
 		}
 		else {
-			enemyStats.Append("Enemy has been defeated\n");
+			enemyStats.Append("Orion has been defeated\n");
 			outputs.Append("\nYOU HAVE BEAT THE BOSS ROOM!\nYOU WILL BE TELEPORTED BACK TO THE STARTING ROOM\nGOOD WORK\n\n");
 			enemy4Alive = false;
 			x = 3, y = 3;
@@ -430,7 +457,7 @@ void Game::Run() {
 	if (x == 3 && y == 6) {
 		if (!raActivate) {
 			raActivate = true;
-			outputs.Append("You have acquired a new spell!\n\t\tSpell name: Ra\tSpell damage: N/A\nThis spell has special functionality\n");
+			outputs.Append("You have acquired a new spell!\n\t\tSpell name: Ra\tSpell damage: 5\nThis spell has special functionality\nIt heals you for 25 hp and does 5 damage to the enemy at the same time!\n");
 			player.addSpell("ra");
 		}
 	}
@@ -442,7 +469,9 @@ void Game::Run() {
 		std::this_thread::sleep_for(std::chrono::seconds(10));
 		keepGameRunning = false;
 	}
-
+	if (enemy1Alive == false && enemy2Alive == false && enemy3Alive == false && enemy4Alive == false) {
+		gameWon = true;
+	}
 	roomVisited[x][y] = true;
 	HUD();
 }
@@ -476,6 +505,7 @@ void Game::HUD() {
 	String::WriteInColor(10, "~~~~~~~~");
 	std::cout << "\t";
 	String::WriteInColor(5, " ~~~~~~~~\n");
+	std::cout << x << " " << y << std::endl;
 	String printItems = player.HUDItemList();
 	String printSpells = player.HUDSpellList();
 	std::cout << "items in inventory: ";

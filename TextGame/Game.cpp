@@ -39,10 +39,6 @@ Game::Game() {
 	enemyStats = "";
 }
 
-//Game::~Game()
-//{
-//}
-
 void Game::Run() {
 	outputs.Replace(outputs, "");
 	enemyStats.Replace(enemyStats, "");
@@ -509,6 +505,46 @@ void Game::Run() {
 	HUD();
 }
 
+void Game::fightRoomRun(Enemy enemy) {
+	String fightUserInput;
+	fightUserInput.ReadFromConsole();
+	if (fightUserInput == "attack") {
+		enemy.takeDamage(player.giveDamage());
+	}
+	else if (fightUserInput == "desolate") {
+		desolate.Cast(enemy);
+	}
+	else if (fightUserInput == "exort") {
+		exort.Cast(enemy);
+	}
+	else if (fightUserInput == "ra") {
+		ra.Cast(player, enemy);
+	}
+	else if (fightUserInput == "heal") {
+		healdrop.Use(player.giveHealth());
+	}
+	else if (fightUserInput == "use item") {
+		String itemChoice;
+		String::WriteInColor(14, "Enter an item name");
+		itemChoice.ReadFromConsole();
+		if (itemChoice == "apple") {
+
+		}
+		else if (itemChoice == "torch") {
+
+		}
+		else if (itemChoice == "healing orb") {
+
+		}
+		else if (itemChoice == "shortstaff") {
+
+		}
+		else {
+
+		}
+	}
+}
+
 void Game::setPlayer(Player player) {
 	this->player = player;
 }
@@ -535,7 +571,7 @@ void Game::HUD() {
 	std::cout << "\t";
 
 	String::WriteInColor(5, "| ");
-	String::WriteInColor(5, player.giveName());
+	String::WriteInColor(95, player.giveName());
 	std::cout << "\n";
 	std::cout << "\t\t\t\t\t\t\t\t";
 	String::WriteInColor(10, "~~~~~~~~");
@@ -562,7 +598,7 @@ void Game::HUD() {
 	std::cout << "________--------_______";
 	std::cout << std::endl;
 	if (mapEnable == true) {
-		map.Use(roomVisited, x, y).WriteToConsole();
+		map.Use(roomVisited).WriteToConsole();
 	}
 	std::cout << std::endl;
 	std::cout << "________--------_______";
@@ -572,8 +608,8 @@ void Game::HUD() {
 	
 	String::WriteInColor(8, "type \"command list\" to see all available inputs\n\n\n");
 	std::cout << "\t\t\t\t\t\t\t\t";
-	String::WriteInColor(1111, "output box:\n");
+	String::WriteInColor(112, "output box:\n");
 	std::cout << "\t\t\t\t\t\t\t\t";
-	outputs.WriteInColor(1111, outputs);
+	outputs.WriteInColor(112, outputs);
 	std::cout << std::endl;
 }

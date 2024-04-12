@@ -60,7 +60,17 @@ const void Apple::Description() const {
 	String::WriteInColor(11, name);
 	std::cout << "- ";
 	description.WriteToConsole();
-	std::cout << "\n";
+	//std::this_thread::sleep_for(std::chrono::seconds(3));
+	String::WriteInColor(2, "\t\t\t\t\t\t\t\t\t\t\t\t          //		   \n");
+	String::WriteInColor(6, "\t\t\t\t\t\t\t\t\t\t\t\t          |		   \n");
+	String::WriteInColor(12, "\t\t\t\t\t\t\t\t\t\t\t\t        @@@@@        \n");
+	String::WriteInColor(12, "\t\t\t\t\t\t\t\t\t\t\t\t    @@@@@@@@@@@@@    \n");
+	String::WriteInColor(12, "\t\t\t\t\t\t\t\t\t\t\t\t   @@@@@@@@@@@@@@@   \n");
+	String::WriteInColor(12, "\t\t\t\t\t\t\t\t\t\t\t\t   @@@@@@@@@@@@@@@   \n");
+	String::WriteInColor(12, "\t\t\t\t\t\t\t\t\t\t\t\t   @@@@@@@@@@@@@@@   \n");
+	String::WriteInColor(12, "\t\t\t\t\t\t\t\t\t\t\t\t     @@@@@@@@@@@     \n");
+	String::WriteInColor(12, "\t\t\t\t\t\t\t\t\t\t\t\t      @@@@ @@@@      \n");
+	String::WriteInColor(12, "\n");
 	return void();
 }
 
@@ -84,8 +94,20 @@ const void Torch::Description() const {
 	String::WriteInColor(11, name);
 	std::cout << "- ";
 	description.WriteToConsole();
+	String::WriteInColor(70, "\t\t\t\t\t\t\t\t\t\t\t\t	 @ \n");
+	String::WriteInColor(70, "\t\t\t\t\t\t\t\t\t\t\t\t	  @  \n");
+	String::WriteInColor(70, "\t\t\t\t\t\t\t\t\t\t\t\t	    @ \n");
+	String::WriteInColor(70, "\t\t\t\t\t\t\t\t\t\t\t\t	  @  @   \n");
+	String::WriteInColor(70, "\t\t\t\t\t\t\t\t\t\t\t\t	 @@@   @\n");
+	String::WriteInColor(70, "\t\t\t\t\t\t\t\t\t\t\t\t	 @   @ \n");
+	String::WriteInColor(78, "\t\t\t\t\t\t\t\t\t\t\t\t	@@@@\n");
+	String::WriteInColor(104, "\t\t\t\t\t\t\t\t\t\t\t\t	///\n");
+	String::WriteInColor(104, "\t\t\t\t\t\t\t\t\t\t\t\t	 /\n");
+	String::WriteInColor(104, "\t\t\t\t\t\t\t\t\t\t\t\t	 /\n");
+	String::WriteInColor(104, "\t\t\t\t\t\t\t\t\t\t\t\t	 /\n");
 	std::cout << "\n";
 	return void();
+
 }
 
 void Torch::Use() {
@@ -146,7 +168,7 @@ const void Map::Description() const {
 	return void();
 }
 
-String Map::Use(bool roomsVisited[7][7], int x, int y) {
+String Map::Use(bool roomsVisited[7][7]) {
 	String map = "[ST]";
 	int westCount = 0;
 	int eastCount = 0;

@@ -68,7 +68,7 @@ private:
 	bool isRoomVisited;
 public:
 	const void Description() const;
-	String Use(bool roomsVisited[7][7], int x ,int y);
+	String Use(bool roomsVisited[7][7]);
 	
 };
 

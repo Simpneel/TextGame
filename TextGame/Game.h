@@ -56,4 +56,5 @@ public:
 	void setPlayer(Player player);
 	void HUD();
 	void Run();
+	void fightRoomRun(Enemy enemy);
 };

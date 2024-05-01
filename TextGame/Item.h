@@ -15,6 +15,7 @@ public:
 	Item(String name, String description);
 	Item(String name, String description, bool isActive);
 	Item& operator=(const Item& item);
+	~Item();
 	
 	virtual const void Description() const;
 	virtual void Use();

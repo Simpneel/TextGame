@@ -35,6 +35,10 @@ Item& Item::operator=(const Item& item) {
 	return *this;
 }
 
+Item::~Item() {
+	delete this;
+}
+
 const void Item::Description() const {
 	String::WriteInColor(11, name);
 	std::cout << "- ";

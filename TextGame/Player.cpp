@@ -124,6 +124,10 @@ String Enemy::giveName() {
 	return name;
 }
 
+Enemy::~Enemy() {
+	delete this;
+}
+
 String Enemy::giveHealth() {
 	int healthOutput = int(health * 100 + .5) / 100;
 	return String(healthOutput);

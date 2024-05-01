@@ -585,6 +585,9 @@ void Game::HUD() {
 	String::WriteInColor(11, printItems);
 	std::cout << std::endl;
 	std::cout << "\t\t\t\t\t\t\t\t\t\t\t\t\t";
+	String::WriteInColor(8, "-_-*---*---*---*-_-");
+	std::cout << std::endl;
+	std::cout << "\t\t\t\t\t\t\t\t\t\t\t\t\t";
 	std::cout << "spells learned: ";
 	String::WriteInColor(11, printSpells);
 

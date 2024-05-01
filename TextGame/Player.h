@@ -36,7 +36,6 @@ private:
 public:
 	Enemy();
 	Enemy(String name, double dmg, double health);
-	~Enemy();
 	String giveName();
 	String giveHealth();
 	double giveHealthdouble() const;
